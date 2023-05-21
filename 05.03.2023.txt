@@ -1,0 +1,70 @@
+
+
+2.
+#include <iostream>
+using namespace std;
+const int SIZE = 2;
+double num(int array[][SIZE])
+{
+setlocale(LC_ALL, "Rus");
+    double SUMMA = 0;
+    for (int i = 0; i < SIZE; i++)
+        for (int j = 0; j < SIZE; j++)
+            SUMMA += array[i][j];
+    return SUMMA / (SIZE * SIZE);
+}
+void num1(int array[][SIZE])
+{
+    setlocale(LC_ALL, "Rus");
+    cout << " Cреднее Арифметическое" << endl;
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+            cout << array[i][j] << "\t";
+        cout << endl;
+    }
+}
+void num2(int array[][SIZE])
+{
+    for (int i = 0; i < SIZE; i++)
+        for (int j = 0; j < SIZE; j++)
+            array[i][j] = rand() % 100;
+}
+
+void main()
+{
+    int a[SIZE][SIZE];
+    num2(a);
+    num1(a);
+    cout << "Среднее Арифметическое  = " << num(a) << endl;
+    system("pause");
+    return;
+}
+3.
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Rus");
+    const int num = 4;
+    int num1 = 0, num2 = 0, num3 = 0;
+    int NUM[4];
+    cout << "Введите элементы массива " << endl;
+    for (int i = 0; i < num; i++) {       //Записывание элементов в массив и подсчет полож.,отриц.,нулевых эл-ов.
+        cin >> NUM[i];
+        if (NUM[i] > 0) num1++;
+        else if (NUM[i] < 0) num2++;
+        else num3++;
+    }
+    for (int i = 0; i < num; i++) {           //Вывод массива.
+        cout << NUM[i] << " ";
+    }
+    cout << endl;
+    cout << "Количество положительных элементов  = " << num1 << endl;
+    cout << "Количество отрицательных элементов  = " << num2 << endl;
+    cout << "Количество нулевых элементов  = " << num3 << endl;
+
+    system("pause");
+    return 0;
+}
