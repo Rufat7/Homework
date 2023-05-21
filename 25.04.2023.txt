@@ -1,0 +1,69 @@
+#include<iostream>
+using namespace std;
+struct Animal{
+    string name;
+    int age;
+    string gender;
+
+    void animal_zoo1() {
+        
+        cout << "Названия животных:" << name << endl << "Возраст: " << age << endl << "Пол:" << gender << endl;
+    }
+    
+};
+
+struct Zoo {
+
+    int max_animals;
+    int num_animals;
+    string name;
+    string animal;
+    void animal_zoo2() {
+        setlocale(LC_ALL, "Rus");
+        cout << "Имя Зоопарка:" << name << endl << "Максимум животных: " << max_animals << endl << "Количество животных:" << num_animals << endl << "животные:" << animal << endl;
+    }
+    void add_animal(Zoo& zoo, const string& name, int age, const string& gender) {
+ 
+        if (zoo.num_animals == zoo.max_animals) {
+            cout << "Can't add animal - Zoo is full" << endl;
+            return;
+        }
+
+        Animal* animal = new Animal;
+        getchar();
+
+        cout << "Enter car make: ";
+        cin >> animal->name;
+
+        cout << "Enter car model: ";
+        cin >> animal->age;
+
+        cout << "Enter car price: ";
+        cin >> animal->gender;
+
+        animal[num_animals] = *animal;
+        num_animals++;
+    }
+};
+
+
+int main() {
+    setlocale(LC_ALL, "Rus");
+    Animal animal;
+   
+    
+    animal.name = "Лев, зебра, обезьяна, тигр, леопард";
+    animal.age = 3;
+    animal.gender = "Мужской";
+    Zoo zoo;
+    zoo.name = "Mini_Zoo";
+    zoo.max_animals = 50;
+    zoo.num_animals = 43;
+    zoo.animal = "Лев, зебра, обезьяна, тигр, леопард";
+
+    animal.animal_zoo1();
+    zoo.animal_zoo2();
+
+
+    return 0;
+}

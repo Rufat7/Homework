@@ -1,0 +1,73 @@
+1.#include <iostream>
+using namespace std;
+int main() {
+    setlocale(LC_ALL, "Rus");
+    string num1;
+    int num2;
+
+    cout << "Введите Слово: ";
+    cin >> num1;
+
+    cout << "Введите значение сдвига: ";
+    cin >> num2;
+
+    for (char& num : num1) {
+        num = (num - 'r' + num2) % 26 + 'r';
+    }
+
+   
+    cout << "Зашифрованнное слово: " << num1 << endl;
+
+    return 0;
+}
+2.
+3.
+#include <iostream>
+
+using namespace std;
+
+void insertionSort(int arr[], int n) {
+    int r, j;
+    for (int i = 1; i < n; i++) {
+        r = arr[i];
+        j = i - 1;
+
+        while (j >= 0 && arr[j] > r) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = r;
+    }
+}
+
+void insertionSort(string& str) {
+    int n = str.length();
+    for (int i = 1; i < n; i++) {
+        char r = str[i];
+        int j = i - 1;
+
+        while (j >= 0 && str[j] > r) {
+            str[j + 1] = str[j];
+            j = j - 1;
+        }
+        str[j + 1] = r;
+    }
+}
+
+int main() {
+    setlocale(LC_ALL, "Rus");
+    int arr[] = { 1, 5, 9, 22, 23, 25};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    insertionSort(arr, n);
+    cout << "Отсортированный массив: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    string str = "сортировка вставками";
+    insertionSort(str);
+    cout << "Отсортированная строка: " << str << endl;
+
+    return 0;
+}

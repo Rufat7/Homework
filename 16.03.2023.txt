@@ -1,0 +1,109 @@
+1.
+#include <iostream>
+using namespace std;
+
+void num(int* arr, int size, int* summ, int* mult)
+{
+    for (int i = 0; i < size; i++)
+    {
+        *summ += *(arr + i);
+    }
+    cout << "Sum: " << *summ << endl;
+    for (int j = 0; j < size; j++)
+    {
+        *mult *= (*arr + j);
+    }
+    cout << "Mult: " << *mult << endl;
+}
+
+int main()
+{
+
+    const int size = 2;
+    int arr[size];
+    int summ = 0, multi = 1;
+    int* numsumm = &summ;
+    int* nummulti = &multi;
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = rand() % 100;
+    }
+    int* pa = &arr[0];
+    num(pa, size, numsumm, nummulti);
+
+    return 0;
+}
+
+
+3.
+#include <iostream>
+using namespace std;
+
+int num(int *A, int *B, int size1, int size2) 
+{
+
+	int* n;
+	int i = 0;
+	for (i = 0; i < size1; i++)
+		int j = i, k = 0;
+	while (j < size1, k < size2)
+		j++;
+	    k++;
+		if (k == size2)
+			return ptr = A + i;
+		else
+			return 0;
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	int size1, size2;
+	cout << "Введите размер масива A";
+	cin >> size1;
+	int* A;
+	cout << "Заполните массив";
+	for (i = 0; i < size1; i++)
+		cin >> A[i];
+	cout << "Введите размер массива B";
+	cin >> B;
+	int* B;
+	cout << "Заполните массив";
+	for (i = 0; i < size2; i++)
+		cin >> B[i];
+	return 0;
+}
+4.
+#include <iostream>
+using namespace std;
+
+int* num(int* arr, int num1, int& num2)
+{
+    int i, j, * r;
+    num2 = 0;
+    for (i = 0; i < num1; i++) if (arr[i] >= 0) num2++;
+    r = new int[num2];
+    j = 0;
+    for (i = 0; i < num1; i++) if (arr[i] >= 0) r[j++] = arr[i];
+    return r;
+}
+
+int main(int Num1, char* Num2[])
+{
+    int* A = new int[10];
+    int i, num1, * num2;
+
+    A[0] = 49;
+    A[1] = -15;
+    A[2] = 77;
+    A[3] = -56;
+    
+
+    num2 = num(A, 4, num1);
+
+    for (i = 0; i < num1; i++) cout << num2[i] << " ";
+
+    cout << endl;
+    return 0;
+}
+
+5.

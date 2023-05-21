@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+#include <array>
+using namespace std;
+
+struct Student {
+    string name;
+    array<bool, 10> grades; 
+};
+
+
+void createStudent(Student& student) {
+    cout << "Введите имя студента: ";
+    getline(cin, student.name);
+
+    cout << "Введите оценки : ";
+    for (int i = 0; i < 10; ++i) {
+        cin >> student.grades[i];
+    }
+}
+
+
+void printStudent(const Student& student) {
+    cout << "Студент: " << student.name << endl;
+    cout << "Оценки: ";
+    for (bool grade : student.grades) {
+        cout << (grade ? "сдал " : "не сдал ");
+    }
+    cout << endl;
+}
+
+double getAverageGrade(const Student& student) {
+    int sum = 0;
+    for (bool grade : student.grades) {
+        if (grade) {
+            ++sum;
+        }
+    }
+    return static_cast<double>(sum) / student.grades.size();
+}
+
+int main() {
+    setlocale(LC_ALL, "Rus");
+ 
+    Student num;
+    createStudent(num);
+    printStudent(num);
+    cout << "Средний балл: " << getAverageGrade(num) << endl;
+}

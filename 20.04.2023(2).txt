@@ -1,0 +1,75 @@
+1.
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+struct Student {
+    string surname;
+    string group;
+    int performance[5];
+};
+
+void printExcellents(Student* students, int size) {
+    cout << "Список отличников:\n";
+    for (int i = 0; i < size; i++) {
+        int excellentCount = 0;
+        for (int j = 0; j < 5; j++) {
+            if (students[i].performance[j] >= 4) {
+                excellentCount++;
+            }
+        }
+        if (excellentCount >= 0.75 * 5) {
+            cout << "Фамилия: " << students[i].surname << ",Группа: " << students[i].group << endl;
+        }
+    }
+}
+
+void printlosers(Student* students, int size) {
+    cout << "Список двоечников:\n";
+    for (int i = 0; i < size; i++) {
+        int losers = 0;
+        for (int j = 0; j < 5; j++) {
+            if (students[i].performance[j] == 2 || students[i].performance[j] == 3) {
+                losers++;
+            }
+        }
+        if (losers > 0.5 * 5) {
+            cout << "Фамилия: " << students[i].surname << ", Группа: " << students[i].group << endl;
+        }
+    }
+}
+
+int main() {
+    setlocale(LC_ALL, "Rus");
+    const int num = 5;
+    int capacity = num;
+    int size = 0;
+    Student* students = new Student[capacity];
+
+
+    students[size++] = { "Алиев", "1", {5, 4, 4, 4, 5} };
+    students[size++] = { "Мамедов", "2", {4, 3, 2, 3, 2} };
+    students[size++] = { "Ханларов","1", {5, 5, 5, 5, 5} };
+
+
+    if (size == capacity) {
+        capacity *= 2;
+        Student* temp = new Student[capacity];
+        for (int i = 0; i < size; i++) {
+            temp[i] = students[i];
+        }
+        delete[] students;
+        students = temp;
+    }
+
+
+    printExcellents(students, size);
+
+
+    printlosers(students, size);
+
+    delete[] students;
+    return 0;
+}
+2.

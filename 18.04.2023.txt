@@ -1,0 +1,129 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+struct Book {
+    string title;
+    string author;
+    string publisher;
+    string genre;
+};
+
+void editBook(Book& book) {
+    cout << "Введите новое название книги: ";
+    getline(cin, book.title);
+    cout << "Введите нового автора книги: ";
+    getline(cin, book.author);
+    cout << "Введите новое издательство книги: ";
+    getline(cin, book.publisher);
+    cout << "Введите новый жанр книги: ";
+    getline(cin, book.genre);
+}
+
+
+void printBook(const Book& book) {
+    cout << "Заголовок: " << book.title << endl;
+    cout << "Автор: " << book.author << endl;
+    cout << "Издатель: " << book.publisher << endl;
+    cout << "Жанр: " << book.genre << endl;
+    cout << endl;
+}
+
+void searchBooksByAuthor(const Book books[], int size, const string& author) {
+    bool found = false;
+    for (int i = 0; i < size; i++) {
+        if (books[i].author == author) {
+            printBook(books[i]);
+            found = true;
+        }
+    }
+    if (!found) {
+        cout << "Книга по автору не найдено " << author << endl;
+    }
+}
+
+void searchBooksByTitle(const Book books[], int size, const string& title) {
+    bool found = false;
+    for (int i = 0; i < size; i++) {
+        if (books[i].title == title) {
+            printBook(books[i]);
+            found = true;
+        }
+    }
+    if (!found) {
+        cout << "Книга с названием не найдены " << title << endl;
+    }
+}
+
+void sortBooksByTitle(Book books[], int size) {
+    sort(books, books + size, [](const Book& book1, const Book& book2) {
+        return book1.title < book2.title;
+        });
+}
+
+void sortBooksByAuthor(Book books[], int size) {
+    sort(books, books + size, [](const Book& book1, const Book& book2) {
+        return book1.author < book2.author;
+        });
+}
+
+int main() {
+    setlocale(LC_ALL, "Rus");
+    
+    Book books[10] = {
+        {"Война и мир", "Лев Толстой", "Драма"},
+        {"1984", "Джордж Оруэлл", "Роман"},
+        {"Улисc", "Джеймс Джойс", "Роман"},
+        {"Лолита", "Владимир Набоков", "Драма/Романтика"},
+        {"Звук и ярость", "Уильям Фолкнер", "Роман"},
+        {"Человек-невидимка", "Ральф Эллисон", "Ужасы"},
+        {"Вирджиния Вулф", "Вирджиния Вул", "Драма"},
+        {"Гомер", "Илиада и Одиссея",  "Героический Эпос"},
+        {"Гордость и предубеждение", "Джейн Остен",  "Драма"},
+        {"Божественная комедия", "Данте Алигьери ", "Эпос"}
+    };
+
+    int choice;
+    string author, title;
+
+   
+    while (true) {
+        cout << "Choose an option:\n";
+        cout << "1. Редактировать книгу\n";
+        cout << "2. Поиск книг по автору\n";
+        cout << "3. Поиск книг по названию\n";
+        cout << "4. Сортировать книги по названию\n";
+        cout << "5. Сортировать книги по авторам\n";
+        cin >> choice;
+
+        switch (choice) {
+        case 1: 
+            int bookIndex;
+            cout << "Введите индекс книги для редактирования: ";
+            cin >> bookIndex;
+            editBook(books[bookIndex]);
+            break;
+        
+        case 2:
+            cout << "Введите имя автора: ";
+            getline(cin >> ws, author);
+            searchBooksByAuthor(books, 10, author);
+            break;
+        case 3: 
+            cout << "Введите название книги: ";
+            getline(cin >> ws, title);
+            searchBooksByTitle(books, 10, title);
+            break;
+        case 4: 
+            sortBooksByTitle(books, 10);
+            cout << "Книги отсортированы по названию.\n";
+            break;
+        case 5:
+            sortBooksByAuthor(books, 10);
+            cout << "Книги отсортированы по авторам.\n";
+            break;
+        }
+    }
+}

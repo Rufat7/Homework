@@ -1,0 +1,100 @@
+3.
+#include <iostream>
+using namespace std;
+
+char* Number_String(int number) {
+    int digits = 0;
+    int temp = number;
+    while (temp > 0) {
+        digits++;
+        temp /= 10;
+    }
+    char* str = new char[digits + 1];
+    for (int i = digits - 1; i >= 0; i--) {
+        str[i] = '0' + (number % 10);
+        number /= 10;
+    }
+    str[digits] = '\0';
+
+    return str;
+}
+
+int main() {
+    int number = 12345;
+    char* str = Number_String(number);
+    cout << str << endl;
+    delete[] str;
+    return 0;
+}
+
+4.
+#include <iostream>
+using namespace std;
+
+char* Uppercase(char* str1) {
+    int len = strlen(str1);
+    for (int i = 0; i < len; i++) {
+        if (str1[i] >= 'a' && str1[i] <= 'z') {
+            str1[i] = str1[i] - ('a' - 'A');
+            
+        }
+    }
+    return str1;
+}
+
+int main() {
+    setlocale(LC_ALL, "Rus");
+    char str1[100];
+    cout << "Введите текст: ";
+    cin.getline(str1, 100);
+    Uppercase(str1);
+    cout << "Преобразование в верхний регистр: " << str1 << endl;
+    return 0;
+}
+
+5.
+#include <iostream>
+using namespace std;
+
+char* Lowercase(char* str1) {
+    int len = strlen(str1);
+    for (int i = 0; i < len; i++) {
+        if (str1[i] >= 'A' && str1[i] <= 'Z') {
+            str1[i] += 32; 
+        }
+    }
+    return str1;
+}
+
+int main() {
+    setlocale(LC_ALL, "Rus");
+    char str1[100];
+    cout << "Введите текст: ";
+    cin.getline(str1, 100);
+    Lowercase(str1);
+    cout << "Преобразование в нижний регистр: " << str1 << endl;
+    return 0;
+}
+6
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+char* mystrrev(char* str) {
+    int len = strlen(str);
+    char* reversed = new char[len + 1];
+    for (int i = 0; i < len; i++) {
+        reversed[i] = str[len - i - 1];
+    }
+    reversed[len] = '\0';
+
+    return reversed;
+}
+
+int main() {
+    char str[] = "Hello, World!";
+    char* reversed = mystrrev(str);
+    cout << reversed << endl;
+    delete[] reversed;
+    return 0;
+}

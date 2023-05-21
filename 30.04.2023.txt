@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+
+
+using namespace std;
+
+struct Student {
+    string Name;
+    string Surname;
+    int age;
+    string faculty;
+    double average_score;
+    int course;
+};
+
+
+struct Academy {
+    string name;
+    string faculty;
+    Student students[100];
+    int count = 0;
+
+
+    void addStudent(Student student) {
+        students[count] = student;
+        count++;
+    }
+
+    void printStudentsByFaculty(string faculty) {
+        for (int i = 0; i < count + 1; i++) {
+            if (students[i].faculty == faculty) {
+                cout << students[i].Name << " " << students[i].Surname << endl;
+            }
+        }
+    }
+};
+
+
+int main() {
+    setlocale(LC_ALL, "Rus");
+  
+    Academy academy = { "БГУ", "Математический" };
+    academy.name = "My Academy";
+    academy.faculty = "Mathematics";
+
+    Student student1 = { "Rufat", "Aliyev", 20, "Mathematics", 4.5, 2 };
+    academy.addStudent(student1);
+
+    academy.printStudentsByFaculty("Mathematics"); 
+
+
+    return 0;   
+}

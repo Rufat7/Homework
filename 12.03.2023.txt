@@ -1,0 +1,89 @@
+1.
+#include <iostream>
+using namespace std;
+
+void num(int* arrNum, int sizeNum)
+{
+    int tmp = 0;
+    for (int i = 0; i < sizeNum; ++i)
+    {
+        for (int j = i + 1; j < sizeNum; ++j)
+        {
+            if (arrNum[j] < arrNum[i])
+            {
+                tmp = arrNum[j];
+                arrNum[j] = arrNum[i];
+                arrNum[i] = tmp;
+            }
+        }
+    }
+}
+
+int main()
+{
+    setlocale(LC_ALL, "Rus");
+    int num1, num2;
+    cout << "Введите размер первого массива: ";
+    cin >> num1;
+    cout << "Введите размер второго массива: ";
+    cin >> num2;
+    int* arrnum1 = new int[num1];
+    int* arrnum2 = new int[num2];
+    cout << "\n\nПервый массив: ";
+    for (int x = 0; x < num1; x++)
+    {
+        arrnum1[x] = rand() % 10 + 1;
+        cout << arrnum1[x] << " ";
+    }
+    cout << "\n\nВторой массив: ";
+    for (int x = 0; x < num2; x++)
+    {
+        arrnum2[x] = rand() % 10 + 1;
+        cout << arrnum2[x] << " ";
+    }
+
+    num(arrnum1, num1);
+    num(arrnum2, num2);
+
+    cout << "\n\nПервый массив (Отсортированный): ";
+    for (int x = 0; x < num1; x++)
+    {
+        cout << arrnum1[x] << " ";
+    }
+    cout << "\n\nВторой массив (Отсортированный): ";
+    for (int x = 0; x < num2; x++)
+    {
+        cout << arrnum2[x] << " ";
+    }
+
+    int* arrC = new int[num1 < num2 ? num1 : num2];
+
+    int sizeC = 0;
+
+    for (int x = 0, y = 0; x < num1 && y < num2; )
+    {
+        if (arrnum1[x] == arrnum2[y])
+        {
+            ++x;
+        }
+        else if (arrnum1[x] == arrnum2[y])
+        {
+            ++y;
+        }
+        else
+        {
+            arrC[sizeC] = arrnum1[x];
+            sizeC++;
+            x++; y++;
+        }
+    }
+
+    cout << "\n\nТретий массив: ";
+    for (int x = 0; x < sizeC; x++)
+    {
+        cout << arrC[x] << " ";
+    }
+
+   
+}
+2.

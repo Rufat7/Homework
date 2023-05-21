@@ -1,0 +1,84 @@
+1.
+#include <iostream>
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Rus");
+    const int size = 3;
+    int prices[size] = { 10, 5, 20 };
+    string names[size] = { "num1", "num2", "num3" };
+
+
+    int max_price = 0;
+    for (int i = 1; i < size; i++) {
+        if (prices[i] > prices[max_price]) {
+            max_price = i;
+        }
+    }
+    cout << "Самый дорогой продукт " << names[max_price] << " по цене " << prices[max_price] << endl;
+
+
+    int min_price = 0;
+    for (int i = 1; i < size; i++) {
+        if (prices[i] < prices[min_price]) {
+            min_price = i;
+        }
+    }
+    cout << "Самый дешевый продукт это " << names[min_price] << " по цене " << prices[min_price] << endl;
+
+    return 0;
+}
+2.
+#include <iostream>
+using namespace std;
+
+void num(string names[], int prices[], int num1) {
+    setlocale(LC_ALL, "Rus");
+    int i, j;
+    string tempName;
+    int tempPrice;
+    for (i = 0; i < num1 - 1; i++) {
+        for (j = 0; j < num1 - i - 1; j++) {
+            if (names[j] > names[j + 1]) {
+       
+                tempName = names[j];
+                names[j] = names[j + 1];
+                names[j + 1] = tempName;
+       
+                tempPrice = prices[j];
+                prices[j] = prices[j + 1];
+                prices[j + 1] = tempPrice;
+            }
+        }
+    }
+}
+
+int main() {
+    setlocale(LC_ALL, "Rus");
+    const int MAX_SIZE = 10;
+    string names[MAX_SIZE];
+    int prices[MAX_SIZE];
+    int num1;
+
+    cout << "Введите количество товаров: ";
+    cin >> num1;
+
+    cout << "Введите имена товаров: " << endl;
+    for (int i = 0; i < num1; i++) {
+        cin >> names[i];
+    }
+
+    cout << "Введите цены товаров: " << endl;
+    for (int i = 0; i < num1; i++) {
+        cin >> prices[i];
+    }
+
+    num(names, prices, num1);
+
+    cout << "Отсортированные товары:" << endl;
+    for (int i = 0; i < num1; i++) {
+        cout << names[i] << " " << prices[i] << endl;
+    }
+
+    return 0;
+}

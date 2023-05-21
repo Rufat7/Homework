@@ -1,0 +1,80 @@
+1.
+#include <iostream>
+using namespace std;
+
+double max(double*, int);
+double min(double*, int);
+double avg(double*, int);
+
+void Action(double* A, double* B, int size, double (*func)(double*, int))
+{
+    cout << "Выберите действие:\n1. Найти максимум\n2. Найти минимум\n3. Найти среднее\n" << endl;
+    int choice;
+    cin >> choice;
+
+    switch (choice)
+    {
+    case 1:
+        cout << "Максимум: " << func(A, size) << endl;
+        break;
+    case 2:
+        cout << "Минимум: " << func(B, size) << endl;
+        break;
+    case 3:
+        cout << "Среднее: " << func(A, size) + func(B, size) / 2 << endl;
+        break;
+    default:
+        cout << "Неправильный выбор\n";
+        break;
+    }
+}
+
+int main()
+{
+    setlocale(LC_ALL, "Rus");
+    const int size = 5;
+    double A[size] = { 2.0, 5.0, 1.0, 10.0, 6.0 };
+    double B[size] = { 2.0, 7.0, 9.0, 8.0, 4.0 };
+
+    Action(A, B, size, max);
+    Action(A, B, size, min);
+    Action(A, B, size, avg);
+
+    return 0;
+}
+
+double max(double* arr, int size)
+{
+    double max = arr[0];
+    for (int i = 1; i < size; i++)
+    {
+        if (arr[i] > max)
+        {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+double min(double* arr, int size)
+{
+    double min = arr[0];
+    for (int i = 1; i < size; i++)
+    {
+        if (arr[i] < min)
+        {
+            min = arr[i];
+        }
+    }
+    return min;
+}
+
+double avg(double* arr, int size)
+{
+    double sum = 0;
+    for (int i = 0; i < size; i++)
+    {
+        sum += arr[i];
+    }
+    return sum / size;
+}

@@ -1,0 +1,31 @@
+#include<iostream>
+using namespace std;
+struct Boiler {
+    
+public:
+    string firm;
+    string color;
+    int power;
+    double volume;
+    int temperature;
+
+    void heat_water() {
+        setlocale(LC_ALL, "Rus");
+        cout << "Boiler:" << firm << endl << "цвет: " << color << endl << "мощность:" << power << endl << "температура нагрева:" << temperature << endl << "объем:" << volume << endl;
+    }
+};
+
+int main() {
+    Boiler boiler1;
+    boiler1.firm = "Samsung";
+    boiler1.color = "Черный";
+    boiler1.power = 2000;
+    boiler1.volume = 10;
+    boiler1.temperature = 80;
+
+  
+     boiler1.heat_water();
+  
+
+    return 0;
+}

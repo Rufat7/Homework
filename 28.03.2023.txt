@@ -1,0 +1,53 @@
+1.
+#include <iostream>
+using namespace std;
+
+template <typename T>
+T find_min(T arr[], int size) {
+    T num_min = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < num_min) {
+            num_min = arr[i];
+        }
+    }
+    return num_min;
+}
+
+template <typename T>
+T find_max(T arr[], int size) {
+    T num_max = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] > num_max) {
+            num_max = arr[i];
+        }
+    }
+    return num_max;
+}
+
+int main() {
+    setlocale(LC_ALL,"Rus");
+    int intArr[] = { 1, 5, 2, 36, 8, 3 };
+    cout << "Минимальное число: " << find_min(intArr, 6) << endl;
+    cout << "Максимальное число: " << find_max(intArr, 6) << endl;
+    return 0;
+}
+2.
+#include <iostream>
+using namespace std;
+
+template <typename T>
+double find_average(T arr[], int size) {
+    double sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += arr[i];
+    }
+    return sum / size;
+}
+
+int main() {
+    setlocale(LC_ALL, "Rus");
+    int intArr[] = { 9, 6, 5,};
+    cout << "Среднее Арифметическое: " << find_average(intArr, 3) << endl;
+    return 0;
+}
+
