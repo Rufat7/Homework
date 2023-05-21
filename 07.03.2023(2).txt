@@ -1,0 +1,60 @@
+1.
+#include <iostream>
+
+
+using namespace std;
+
+int** num(int n1, int n2) 
+{
+    int** arr = new int* [n1];
+    for (int i = 0; i < n1; i++)
+        arr[i] =  new int[n2];
+    return arr;
+}
+void num1(int** arr, int n1, int n2, int n3 = 1, int n4 = 10) 
+{
+    for (int i = 0; i < n1; i++)
+        for (int j = 0; j < n2; j++)
+            arr[i][j] = n3 + rand() % (n4 - n3 + 1);
+}
+void num2(int** arr, int n, int n2) 
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n2; j++)
+            cout << arr[i][j] << " ";
+        cout << endl;
+    }
+}
+int main()
+{
+    int n = 3, n2 = 3;
+    int** arr = num(n, n2);
+    num1(arr, n, n2);
+    num2(arr, n, n2);
+
+}
+
+2.
+#include <iostream>
+using namespace std;
+int num(int num1, int num2)
+{
+    if (num2 == 0)
+        return num1;
+    if (num1 > num2)
+        return num(num2, num1 % num2);
+    else
+        return num(num1, num2 % num1);
+}
+
+int main()
+{
+    setlocale(LC_ALL,"Rus");
+    int num1, num2;
+    cout << "Введите 2 числа: " << endl;
+    cin >> num1 >> num2;
+    cout << "Наибольльший общий делитель равен: " << num(num2, num1 % num2) << endl;
+    return 0;
+}
+
