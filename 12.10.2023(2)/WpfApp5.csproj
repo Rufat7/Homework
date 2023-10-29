@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Снимок экрана 2023-10-26 001430.png" />
+    <None Remove="Снимок экрана 2023-10-26 001711.png" />
+    <None Remove="Снимок экрана 2023-10-26 001950.png" />
+    <None Remove="Снимок экрана 2023-10-26 002140.png" />
+    <None Remove="Снимок экрана 2023-10-26 002658.png" />
+    <None Remove="Снимок экрана 2023-10-26 003006.png" />
+    <None Remove="Снимок экрана 2023-10-26 003227.png" />
+    <None Remove="Снимок экрана 2023-10-26 003430.png" />
+    <None Remove="Снимок экрана 2023-10-26 003544.png" />
+    <None Remove="Снимок экрана 2023-10-26 003806.png" />
+    <None Remove="Снимок экрана 2023-10-26 003920.png" />
+    <None Remove="Снимок экрана 2023-10-26 004011.png" />
+    <None Remove="Снимок экрана 2023-10-26 004209.png" />
+    <None Remove="Снимок экрана 2023-10-26 004428.png" />
+    <None Remove="Снимок экрана 2023-10-26 004534.png" />
+    <None Remove="Снимок экрана 2023-10-30 004856.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Снимок экрана 2023-10-26 001430.png" />
+    <Resource Include="Снимок экрана 2023-10-26 001711.png" />
+    <Resource Include="Снимок экрана 2023-10-26 001950.png" />
+    <Resource Include="Снимок экрана 2023-10-26 002140.png" />
+    <Resource Include="Снимок экрана 2023-10-26 002658.png" />
+    <Resource Include="Снимок экрана 2023-10-26 003006.png" />
+    <Resource Include="Снимок экрана 2023-10-26 003227.png" />
+    <Resource Include="Снимок экрана 2023-10-26 003430.png" />
+    <Resource Include="Снимок экрана 2023-10-26 003544.png" />
+    <Resource Include="Снимок экрана 2023-10-26 003806.png" />
+    <Resource Include="Снимок экрана 2023-10-26 003920.png" />
+    <Resource Include="Снимок экрана 2023-10-26 004011.png" />
+    <Resource Include="Снимок экрана 2023-10-26 004209.png" />
+    <Resource Include="Снимок экрана 2023-10-26 004428.png" />
+    <Resource Include="Снимок экрана 2023-10-26 004534.png" />
+    <Resource Include="Снимок экрана 2023-10-30 004856.png" />
+  </ItemGroup>
+
+</Project>
