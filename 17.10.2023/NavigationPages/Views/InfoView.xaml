@@ -29,10 +29,10 @@
             Grid.Column="0"
             Grid.Row="0"
   Background="#CC0605"
-  Width="140"
-  Padding="8">
+  Width="150"
+  Padding="12">
             <TextBlock
-    FontSize="18" Text="Temperature:">
+    FontSize="15" Text="Temperature:">
 
             </TextBlock>
         </materialDesign:Card>
@@ -42,10 +42,10 @@
           Grid.Row="1"
 Background="#CC0605"
 
-Width="140"
-Padding="8">
+Width="150"
+Padding="12">
             <TextBlock
-  FontSize="18" Text="Feels like:">
+  FontSize="15" Text="Feels like:">
 
             </TextBlock>
         </materialDesign:Card>
@@ -54,10 +54,10 @@ Padding="8">
           Grid.Column="0"
           Grid.Row="2"
 Background="#CC0605"
-Width="140"
-Padding="8">
+Width="150"
+Padding="12">
             <TextBlock
-  FontSize="18" Text="Pressure:">
+  FontSize="15" Text="Pressure:">
 
 
             </TextBlock>
@@ -67,10 +67,10 @@ Padding="8">
           Grid.Column="0"
           Grid.Row="3"
 Background="#CC0605"
-Width="140"
-Padding="8">
+Width="150"
+Padding="12">
             <TextBlock
-  FontSize="18" Text="Sunset:">
+  FontSize="15" Text="Sunset:">
 
             </TextBlock>
         </materialDesign:Card>
@@ -80,10 +80,10 @@ Padding="8">
           Grid.Row="4"
 Background="#CC0605"
 
-Width="140"
-Padding="8">
+Width="150"
+Padding="12">
             <TextBlock
-  FontSize="18" Text="Sunrise:">
+  FontSize="15" Text="Sunrise:">
 
             </TextBlock>
         </materialDesign:Card>

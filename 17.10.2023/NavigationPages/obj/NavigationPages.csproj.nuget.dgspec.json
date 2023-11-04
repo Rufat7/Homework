@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Downloads\\NavigationPages\\NavigationPages\\NavigationPages.csproj": {}
+    "C:\\Rufat\\HomeWork\\17.10.2023\\NavigationPages\\NavigationPages.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Downloads\\NavigationPages\\NavigationPages\\NavigationPages.csproj": {
+    "C:\\Rufat\\HomeWork\\17.10.2023\\NavigationPages\\NavigationPages.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Downloads\\NavigationPages\\NavigationPages\\NavigationPages.csproj",
+        "projectUniqueName": "C:\\Rufat\\HomeWork\\17.10.2023\\NavigationPages\\NavigationPages.csproj",
         "projectName": "NavigationPages",
-        "projectPath": "C:\\Users\\User\\Downloads\\NavigationPages\\NavigationPages\\NavigationPages.csproj",
+        "projectPath": "C:\\Rufat\\HomeWork\\17.10.2023\\NavigationPages\\NavigationPages.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Downloads\\NavigationPages\\NavigationPages\\obj\\",
+        "outputPath": "C:\\Rufat\\HomeWork\\17.10.2023\\NavigationPages\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
