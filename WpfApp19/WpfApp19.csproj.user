@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Page Update="Dictionary1.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dictionary2.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dictionary3.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dictionary4.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
