@@ -7,7 +7,7 @@ CREATE TABLE Groups
     GroupID INT PRIMARY KEY IDENTITY(1,1),
     GroupName nvarchar(10) NOT NULL UNIQUE,
     GroupRating INT NOT NULL CHECK(0 < GroupRating AND GroupRating < 5),
-    Year INT NOT NULL CHECK(1 < Year AND Year < 5)
+    GroupYear INT NOT NULL CHECK(1 < GroupYear AND GroupYear < 5)
 );
 
 
