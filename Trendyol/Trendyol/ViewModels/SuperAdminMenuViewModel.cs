@@ -53,7 +53,7 @@ class SuperAdminMenuViewModel : ViewModelBase
         get => new(
             () =>
             {
-                _navigationService.NavigateTo<LogInViewModel>();
+                _navigationService.NavigateTo<LoglnViewModel>();
             });
     }
 

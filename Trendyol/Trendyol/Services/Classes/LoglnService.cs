@@ -7,7 +7,7 @@ using Trendyol.Models;
 
 namespace Trendyol.Services.Classes
 {
-    class LogInService
+    class LoglnService
     {
 
         public bool IsEmail(string login,DBContext dBContext)

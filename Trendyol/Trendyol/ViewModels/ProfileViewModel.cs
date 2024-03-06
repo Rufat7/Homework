@@ -72,7 +72,7 @@ namespace Trendyol.ViewModels;
         get => new(
             () =>
             {
-                _navigationService.NavigateTo<GoodsPageViewModel>();
+                _navigationService.NavigateTo<GoodsViewModel>();
             });
     }
 

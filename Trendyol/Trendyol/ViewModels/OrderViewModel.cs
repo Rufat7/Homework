@@ -17,7 +17,7 @@ using Trendyol.Services.Interfaces;
 
 namespace Trendyol.ViewModels
 {
-    class OrderPageViewModel : ViewModelBase
+    class OrderViewModel : ViewModelBase
     {
         private readonly IMessenger _messenger;
         private readonly INavigationService _navigationService;
@@ -71,7 +71,7 @@ namespace Trendyol.ViewModels
 
 
 
-        public OrderPageViewModel(INavigationService navigationService, IDataService dataService, IMessenger messenger,DBContext dBContext)
+        public OrderViewModel(INavigationService navigationService, IDataService dataService, IMessenger messenger,DBContext dBContext)
         {
             _navigationService = navigationService;
             _dataService = dataService;
@@ -116,7 +116,7 @@ namespace Trendyol.ViewModels
                         _dbContext.Orders.Add(newOrder);
                         _dbContext.SaveChanges();
                         MessageBox.Show("Sucsessfully bought!");
-                        _navigationService.NavigateTo<GoodsPageViewModel>();
+                        _navigationService.NavigateTo<GoodsViewModel>();
                     }
                     else
                         MessageBox.Show("You must buy at least 1 product");

@@ -23,7 +23,7 @@ namespace Trendyol.ViewModels
         private readonly NavigationService navigationService;
         private readonly VerificationService _verificationService = new();
         DBContext _dbContext;
-        public LogInService _loginService;
+        public LoglnService _loginService;
         public string _nameText = "";
         public string _surnameText = "";
         public string _emailText = "";
@@ -58,7 +58,7 @@ namespace Trendyol.ViewModels
         }
 
 
-        public RegistrationViewModel(INavigationService navigationService, IDataService dataService, IMessenger messenger,DBContext dBContext,LogInService logInService)
+        public RegistrationViewModel(INavigationService navigationService, IDataService dataService, IMessenger messenger,DBContext dBContext,LoglnService logInService)
         {
             _navigationService = navigationService;
             _dataService = dataService;
@@ -102,7 +102,7 @@ namespace Trendyol.ViewModels
                        _dataService.SendData(newUser);
                        _dbContext.SaveChanges();
                        MessageBox.Show("Successfully Signed Up!");
-                       _navigationService.NavigateTo<GoodsPageViewModel>();
+                       _navigationService.NavigateTo<GoodsViewModel>();
 
                    }
                    else
@@ -121,7 +121,7 @@ namespace Trendyol.ViewModels
             get => new(
            () =>
            {
-               _navigationService.NavigateTo<LogInViewModel>();
+               _navigationService.NavigateTo<LoglnViewModel>();
                Name = "";
                Surname = "";
                Email = "";

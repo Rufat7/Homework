@@ -28,16 +28,16 @@ namespace Trendyol
             Container.RegisterSingleton<IDataService, DataService>();
 
             Container.RegisterSingleton<MainViewModel>();
-            Container.RegisterSingleton<LogInViewModel>();
+            Container.RegisterSingleton<LoglnViewModel>();
             Container.RegisterSingleton<RegistrationViewModel>();
             Container.RegisterSingleton<ProfileViewModel>();
-            Container.RegisterSingleton<GoodsPageViewModel>();
-            Container.RegisterSingleton<OrderPageViewModel>();
+            Container.RegisterSingleton<GoodsViewModel>();
+            Container.RegisterSingleton<OrderViewModel>();
             Container.RegisterSingleton<SuperAdminMenuViewModel>();
             Container.RegisterSingleton<AdminMenuViewModel>();
             Container.RegisterSingleton<AddProductViewModel>();
             Container.RegisterSingleton<DBContext>();
-            Container.RegisterSingleton<LogInService>();
+            Container.RegisterSingleton<LoglnService>();
             
 
             Container.Verify();

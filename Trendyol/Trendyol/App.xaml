@@ -12,16 +12,16 @@
             <DataTemplate DataType="{x:Type ViewModels:RegistrationViewModel}">
                 <View:Registration/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type ViewModels:LogInViewModel}">
+            <DataTemplate DataType="{x:Type ViewModels:LoglnViewModel}">
                 <View:LogIn/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type ViewModels:GoodsPageViewModel}">
+            <DataTemplate DataType="{x:Type ViewModels:GoodsViewModel}">
                 <View:GoodsPage/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type ViewModels:ProfileViewModel}">
                 <View:Profile/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type ViewModels:OrderPageViewModel}">
+            <DataTemplate DataType="{x:Type ViewModels:OrderViewModel}">
                 <View:OrderView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type ViewModels:SuperAdminMenuViewModel}">
