@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace UdpClientWork
+namespace _20
 {
     /// <summary>
     /// Interaction logic for App.xaml
