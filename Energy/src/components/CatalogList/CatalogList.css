@@ -2,13 +2,11 @@
   width: 100%;
   height: auto;
 }
- 
 
-
-.shoes-list {
+.drinks-list { 
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start; 
 }
 
 .card {
@@ -58,9 +56,6 @@
   padding: 0;
 }
 
-
-
-
 .card a {
   text-decoration: none;
   color: inherit;
@@ -70,4 +65,3 @@
   text-decoration: none;
   color: inherit;
 }
-

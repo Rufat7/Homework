@@ -1,8 +1,6 @@
 import Catalog from "./components/Catalog/Catalog";
 import Home from "./components/Home/Home";
-import Login from "./components/Login/Login";
 import ProductPage from "./components/ProductPage/ProductPage";
-import Register from "./components/Register/Register";
 import About from "./components/About/About"
 import News from "./components/News/News"
 

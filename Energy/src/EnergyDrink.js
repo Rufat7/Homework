@@ -1,4 +1,4 @@
-const phones = [
+const drinks = [
   {
     id: 1,
     name: "RedBull",
@@ -76,4 +76,4 @@ const phones = [
     
 ];
 
-export default phones;
+export default drinks;
