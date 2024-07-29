@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import "./Catalog.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import phones from "../../Phones";
+import phones from "../../EnergyDrink";
 import CatalogFilter from "../CatalogFilter/CatalogFilter";
 import CatalogList from "../CatalogList/CatalogList";
 

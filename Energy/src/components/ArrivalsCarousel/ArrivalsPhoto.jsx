@@ -1,11 +1,11 @@
 import React from "react";
 import "./ArrivalsPhoto.css";
-import logo from "../../Phones_Picture/logo.png";
+import energylogo from "../../Energy_Picture/energylogo.png";
 
 const ArrivalsPhoto = () => {
   return (
     <div className="arrivals-image">
-      <img src={logo} alt="" />
+      <img src={energylogo} alt="" />
     </div>
   );
 };

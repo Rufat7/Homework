@@ -1,11 +1,11 @@
 import './ArrivalsText.css'
 import "./ArrivalsPhoto.css";
-import monsterr from "../../Phones_Picture/monsterr.jpg";
+import drinkenergy from "../../Energy_Picture/drinkenergy.jpg";
 
 const ArrivalsText = () => {
     return (
       <div className="arrivals-image">
-        <img src={monsterr} alt="" />
+        <img src={drinkenergy} alt="" />
       </div>
     );
 }

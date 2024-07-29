@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import "./CatalogList.css";
-import phones from "../../Phones";
+import drinks from "../../EnergyDrink";
 import { Link } from "react-router-dom";
  
 
 export default function CatalogList() {
   return (
     <div className="list-container">
-      <div className="shoes-list">
-        {phones.map((shoe) => (
-          <div key={shoe.id} className="card">
-            <Link to={`/product/${shoe.title}`}>
+      <div className="drinks-list">
+        {drinks.map((drink) => (
+          <div key={drink.id} className="card">
+            <Link to={`/product/${drink.title}`}>
               <img
-                src={require(`../../Phones_Picture/${shoe.title}.jpg`)}
-                alt={shoe.name}
+                src={require(`../../Energy_Picture/${drink.title}.jpg`)}
+                alt={drink.name}
               />
             </Link>
-            <Link to={`/product/${shoe.title}`}>
+            <Link to={`/product/${drink.title}`}>
               <div className="card-information">
-                <p className="card-brand">{shoe.name}</p>
-                <p className="card-price">{shoe.price}$</p>
+                <p className="card-brand">{drink.name}</p>
+                <p className="card-price">{drink.price}$</p>
               </div>
             </Link>
           </div>

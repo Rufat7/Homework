@@ -5,8 +5,8 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 
 import logo from "../../Logos/logo.svg";
-import user from "../../Logos/user.svg";
-import settings from "../../Logos/settings.svg";
+import user from "../../Logos/user.png";
+
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);

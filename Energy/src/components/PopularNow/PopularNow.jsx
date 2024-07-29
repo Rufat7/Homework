@@ -1,15 +1,15 @@
 import Item from "./Item";
 import "./PopularNow.css";
 import React from "react";
-import phones from '../../Phones';
+import drinks from '../../EnergyDrink';
 
 const PopularNow = () => {
-  const popularShoes = phones.sort((a, b) => b.rating - a.rating).slice(0, 6);
+  const popularDrinks = drinks.sort((a, b) => b.rating - a.rating).slice(0, 4);
 
   return (
     <div className="popular-now-container">
-      {popularShoes.map(shoe => (
-        <Item key={shoe.id} shoe={shoe} />
+      {popularDrinks.map(drink => (
+        <Item key={drink.id} drink={drink} />
       ))}
     </div>
   );

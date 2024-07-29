@@ -1,20 +1,20 @@
 import "./Item.css";
 import React from 'react';
-import phones from "../../Phones";
+import drinks from "../../EnergyDrink";
 import { Link } from "react-router-dom";
  
 
 
-const Item = ({ shoe }) => {
-  const shoeImg = require(`../../Phones_Picture/${shoe.title}.jpg`);
+const Item = ({ drink }) => {
+  const drinkImg = require(`../../Energy_Picture/${drink.title}.jpg`);
 
   return (
     <div className='popular-item-container'>
-       <Link to={`/product/${shoe.title}`}>
-       <img src={shoeImg} alt={shoe.title} />
+       <Link to={`/product/${drink.title}`}>
+       <img src={drinkImg} alt={drink.title} />
        </Link>
-      <h2>{shoe.name}</h2>
-      <b>{shoe.price} $</b>
+      <h2>{drink.name}</h2>
+      <b>{drink.price} $</b>
      
     </div>
 

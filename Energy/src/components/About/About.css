@@ -1,0 +1,67 @@
+/* Ensure that the about container takes up the full viewport height */
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .about-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    box-sizing: border-box;
+  }
+  
+  .about-container h1 {
+    margin: 0;
+    font-size: 2em;
+    text-align: center;
+  }
+  
+  .about-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto; /* Scroll if content overflows */
+  }
+  
+  .about-section {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.2s;
+    cursor: pointer; /* Add cursor pointer for clickable effect */
+    background-color: #fff; /* Ensure background color for visibility */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  }
+  
+  .about-section:hover {
+    transform: scale(1.02);
+  }
+  
+  .about-image {
+    width: 200px; /* Adjust size as needed */
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+  
+  .about-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .about-content h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.5em;
+  }
+  
+  .about-content p {
+    margin: 0;
+    font-size: 1em;
+    line-height: 1.5;
+  }
+  

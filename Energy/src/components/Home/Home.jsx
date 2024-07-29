@@ -13,7 +13,7 @@ export default function Home() {
     <div className="home-container">
       <Header />
       <NewArrivalsCarousel />
-      <p className="best">Best Sellers:</p>
+      <p className="best">Best Energy:</p>
       <PopularNow/>
       <BrandsCarousel />
       <Footer />

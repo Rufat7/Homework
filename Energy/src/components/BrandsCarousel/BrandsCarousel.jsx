@@ -25,6 +25,48 @@ const BrandsCarousel = () => {
           src={require("../../Carousel_Logos/litenergy.svg").default}
           alt="Favorites"
         />
+          <img
+          src={require("../../Carousel_Logos/adrenaline.svg").default}
+          alt="Favorites"
+        />
+        <img
+          src={require("../../Carousel_Logos/monster.svg").default}
+          alt="Favorites"
+        />
+        
+        <img
+          src={require("../../Carousel_Logos/red_bull.svg").default}
+          alt="Favorites"
+        />
+        <img
+          src={require("../../Carousel_Logos/volt.svg").default}
+          alt="Favorites"
+        />
+        <img
+          src={require("../../Carousel_Logos/litenergy.svg").default}
+          alt="Favorites"
+        />
+        <img
+          src={require("../../Carousel_Logos/adrenaline.svg").default}
+          alt="Favorites"
+        />
+        <img
+          src={require("../../Carousel_Logos/monster.svg").default}
+          alt="Favorites"
+        />
+        
+        <img
+          src={require("../../Carousel_Logos/red_bull.svg").default}
+          alt="Favorites"
+        />
+        <img
+          src={require("../../Carousel_Logos/volt.svg").default}
+          alt="Favorites"
+        />
+        <img
+          src={require("../../Carousel_Logos/litenergy.svg").default}
+          alt="Favorites"
+        />
       </div>
     </div>
   );

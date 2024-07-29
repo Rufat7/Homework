@@ -2,7 +2,6 @@
 
 .home-container {
     width: 100%;
-    padding: 10px 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,9 +10,11 @@
 }
 
 .best {
-    color:#000000 ;
+    color: #000000;
     align-items: center;
     justify-content: center;
     display: flex;
     font-size: 1.75rem;
+    margin-top: 20px; 
+    padding-top: 10px; 
 }
