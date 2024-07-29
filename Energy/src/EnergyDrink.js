@@ -14,7 +14,7 @@ const drinks = [
   },
   {
     id: 2,
-    name: "ADRENALINE",
+    name: "Adrenaline",
     sizes: [250, 500],
  
     price: "1,58",
@@ -43,9 +43,9 @@ const drinks = [
    
     price: "4",
     images: [
-      "Monster.jpg",
+      "monsterr.jpg",
     ],
-    title: "Monster",
+    title: "monsterr",
     
   },
   {
