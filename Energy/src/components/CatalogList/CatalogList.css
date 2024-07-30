@@ -3,10 +3,10 @@
   height: auto;
 }
 
-.drinks-list { /* Обновлено название класса */
+.drinks-list { 
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; /* Элементы выстраиваются по левому краю */
+  justify-content: flex-start; 
 }
 
 .card {

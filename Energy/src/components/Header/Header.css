@@ -69,7 +69,7 @@
 
 .user-menu {
   position: absolute;
-  top: 60px; /* Увеличиваем отступ сверху, чтобы меню не перекрывалось */
+  top: 60px; 
   right: 0;
   background-color: #f8f8f8;
   border: 1px solid #ddd;
@@ -79,13 +79,13 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-  transform: translateY(-20px); /* Увеличиваем начальное смещение вверх */
+  transform: translateY(-20px);
 }
 
 .user-menu-container:hover .user-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0); /* Сдвиг вниз при наведении */
+  transform: translateY(0); 
 }
 
 .user-menu a {
@@ -96,7 +96,7 @@
   white-space: nowrap;
   transition: background-color 0.3s ease, transform 0.3s ease, border-radius 0.3s ease;
   border-radius: 8px;
-  margin-bottom: 5px; /* Добавляем отступ между пунктами меню */
+  margin-bottom: 5px; 
 }
 
 .user-menu a:last-child {

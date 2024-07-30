@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
-import BrandsCarousel from "../BrandsCarousel/BrandsCarousel";
-import NewArrivalsCarousel from "../ArrivalsCarousel/NewArrivalsCarousel";
+import Brands from "../Brands/Brands";
+import NewArrivalsCarousel from "../Arrivals/NewArrivalsCarousel";
 
 import PopularNow from "../PopularNow/PopularNow";
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ export default function Home() {
       <NewArrivalsCarousel />
       <p className="best">Best Energy:</p>
       <PopularNow/>
-      <BrandsCarousel />
+      <Brands />
       <Footer />
     </div>
   );

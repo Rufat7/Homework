@@ -1,6 +1,6 @@
-import "./BrandsCarousel.css";
+import "./Brands.css";
 
-const BrandsCarousel = () => {
+const Brands = () => {
   return (
     <div className="brand-carousel-container">
       <div className="brand-carousel-slides">
@@ -72,4 +72,4 @@ const BrandsCarousel = () => {
   );
 };
 
-export default BrandsCarousel;
+export default Brands;

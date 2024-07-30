@@ -1,8 +1,13 @@
+.wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px; /* Расстояние от края окна */
+}
+
 .catalog-container {
     height: auto;
-
 }
- 
 
 .filter-list-container {
     display: flex;
