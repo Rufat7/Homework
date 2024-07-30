@@ -1,3 +1,4 @@
+/* Ensure that the about container takes up the full viewport height */
 html, body {
     height: 100%;
     margin: 0;
@@ -6,8 +7,8 @@ html, body {
   .about-container {
     display: flex;
     flex-direction: column;
-    height: 100vh; 
-    width: 100vw; 
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
     box-sizing: border-box;
   }
   
@@ -21,7 +22,7 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    overflow-y: auto; 
+    overflow-y: auto; /* Scroll if content overflows */
   }
   
   .about-section {
@@ -31,9 +32,9 @@ html, body {
     padding: 15px;
     border-radius: 8px;
     transition: transform 0.2s;
-    cursor: pointer; 
-    background-color: #fff; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer; /* Add cursor pointer for clickable effect */
+    background-color: #fff; /* Ensure background color for visibility */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
   }
   
   .about-section:hover {
@@ -41,7 +42,7 @@ html, body {
   }
   
   .about-image {
-    width: 200px;
+    width: 200px; /* Adjust size as needed */
     height: 150px;
     object-fit: cover;
     border-radius: 8px;

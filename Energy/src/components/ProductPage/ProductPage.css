@@ -17,7 +17,7 @@
   justify-content: center;
 }
 
-
+/* Images Block */
 
 .product-gallery {
   display: flex;
@@ -56,7 +56,7 @@
 }
 
 
-
+/* Information Block */
 
 .product-information {
   display: flex;

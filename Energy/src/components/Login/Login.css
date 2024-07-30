@@ -20,7 +20,7 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-
+/* Modal Left Side */
 .modal-window-left-side {
     flex: 1;
     display: flex;
@@ -44,7 +44,7 @@
     width: 80%;
 }
 
-
+/* Modal Right Side */
 .modal-window-right-side {
     flex: 1;
     display: flex;

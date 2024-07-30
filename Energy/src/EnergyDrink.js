@@ -1,4 +1,4 @@
-const drinks = [
+const phones = [
   {
     id: 1,
     name: "RedBull",
@@ -14,7 +14,7 @@ const drinks = [
   },
   {
     id: 2,
-    name: "Adrenaline",
+    name: "ADRENALINE",
     sizes: [250, 500],
  
     price: "1,58",
@@ -43,9 +43,9 @@ const drinks = [
    
     price: "4",
     images: [
-      "monsterr.jpg",
+      "Monster.jpg",
     ],
-    title: "monsterr",
+    title: "Monster",
     
   },
   {
@@ -76,4 +76,4 @@ const drinks = [
     
 ];
 
-export default drinks;
+export default phones;
