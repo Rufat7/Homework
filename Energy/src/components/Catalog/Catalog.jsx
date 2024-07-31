@@ -8,8 +8,6 @@ import CatalogList from "../CatalogList/CatalogList";
 
 export default function Catalog() {
   const [filters, setFilters] = useState({
-    price: [0, 100000],
-        sizes: [],
   });   
   
   

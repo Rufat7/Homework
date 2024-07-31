@@ -1,21 +1,32 @@
-.wrapper {
-    position: absolute;
+.container {
+    display: flex;
+    justify-content: flex-end; 
+    padding: 20px;
+    border: 1px solid #ddd;
+    height: 100vh;
+  }
+  
+  .wrapper {
+    position: relative; 
     top: 0;
     right: 0;
-    margin: 20px; /* Расстояние от края окна */
-}
-
-.catalog-container {
+    margin: 40px;
+  }
+  
+  .catalog-container {
     height: auto;
-}
-
-.filter-list-container {
+  }
+  
+  .filter-list-container {
     display: flex;
     flex-direction: row;
-    gap: 20px;
-    padding: 30px;
-}
-
-.all-shoes-p {
-    padding-left: 5%;
-}
+    gap: 100px;
+    padding: 10px;
+    margin-left: auto;
+  }
+  
+  .all-shoes-p {
+    padding-right: 0; 
+    padding-left: 5%; 
+  }
+  

@@ -17,16 +17,6 @@ export default function Register({ onClose, openLogin }) {
           <button className="register-button">Регистрация</button>
           <div className="to-login-section">
       
-            <a
-              href="#toLogin"
-              className="to-login-button"
-              onClick={() => {
-                onClose();
-                openLogin();
-              }}
-            >
-              Вход
-            </a>
           </div>
         </div>
       </div>

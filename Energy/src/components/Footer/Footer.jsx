@@ -5,28 +5,35 @@ export default function Footer() {
   return (
 <footer className="footer">
       <div className="footer-section">
-        <h4>О компании</h4>
+        <h4>О нас</h4>
         <ul>
           <li>
-            <a href="#about">О нас</a>
+            <a href="#about">Наша Компания</a>
           </li>
           <li>
-            <a href="#contact">Контакты</a>
+            <a href="#contact">История</a>
           </li>
           
+          <li>
+            <a href="#contact">Вакансия</a>
+          </li>
         </ul>
       </div>
       <div className="footer-section">
-        <h4>Полезные ссылки</h4>
+        <h4>ДОПОЛНИТЕЛЬНОЕ ЮРИДИЧЕСКОЕ ОБОСНОВАНИЕ</h4>
         <ul>
           <li>
-            <a href="#faq">FAQ</a>
+            <a href="#faq">Условия использования</a>
           </li>
           <li>
-            <a href="#support">Поддержка</a>
+            <a href="#support">Политика конфиденциаль-
+            ности</a>
           </li>
           <li>
-            <a href="#privacy">Политика конфиденциальности</a>
+            <a href="#privacy">Установки cookie-файлов</a>
+          </li>
+          <li>
+            <a href="#privacy">Политика "cookie"</a>
           </li>
         </ul>
       </div>

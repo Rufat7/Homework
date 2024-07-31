@@ -7,7 +7,6 @@ import Register from "../Register/Register";
 import logo from "../../Logos/logo.svg";
 import user from "../../Logos/user.png";
 
-
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
@@ -52,15 +51,23 @@ export default function Header() {
           <button className="nav-button">О Нас</button>
         </Link>
       </div>
+      <div className="search-container">
+        <form action="/search" method="GET">
+          <input type="text" name="query" className="search-input" placeholder="Поиск..." />
+          <button type="submit" className="search-button">Поиск</button>
+        </form>
+      </div>
       <div className="user-favorites-container">
         <div className="user-menu-container">
-          <img src={user} alt="User" onClick={openLogin} />
-          
+          <img src={user} alt="User" onClick={toggleMenu} className="user-icon"/>
+          <div className={`user-menu ${menuOpen ? "open" : ""}`}>
+            <button onClick={openLogin}>Войти</button>
+            <button onClick={openRegister}>Регистрация</button>
+          </div>
         </div>
       </div>
 
       {loginOpen && <Login onClose={closeLogin} openRegister={openRegister} />}
-
       {registerOpen && (
         <Register onClose={closeRegister} openLogin={openLogin} />
       )}
