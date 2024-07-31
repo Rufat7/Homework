@@ -1,10 +1,10 @@
 
 import ArrivalsPhoto from './ArrivalsPhoto';
 import ArrivalsText from './ArrivalsText';
-import './NewArrivalsCarousel.css';
+import './NewArrivals.css';
 
 
-const NewArrivalsCarousel = () => {
+const NewArrivals = () => {
     return (
       <div className="arrivals-carousel-container">
         <div className='arrivals-carousel'>
@@ -20,4 +20,4 @@ const NewArrivalsCarousel = () => {
 }
 
 
-export default NewArrivalsCarousel;
+export default NewArrivals;

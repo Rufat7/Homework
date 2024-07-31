@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 import Brands from "../Brands/Brands";
-import NewArrivalsCarousel from "../Arrivals/NewArrivalsCarousel";
+import NewArrivals from "../Arrivals/NewArrivals";
 
 import PopularNow from "../PopularNow/PopularNow";
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="home-container">
       <Header />
-      <NewArrivalsCarousel />
+      <NewArrivals />
       <p className="best">Best Energy:</p>
       <PopularNow/>
       <Brands />

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./CatalogList.css";
+import "./List.css";
 import drinks from "../../EnergyDrink";
 import { Link } from "react-router-dom";
  
 
-export default function CatalogList() {
+export default function List() {
   return (
     <div className="list-container">
       <div className="drinks-list">

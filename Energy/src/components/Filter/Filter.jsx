@@ -1,5 +1,5 @@
 import React from "react";
-import "./CatalogFilter.css";
+import "./Filter.css";
 import three from "../../Energy_Picture/three.png";
 
 const CatalogFilter = () => {
