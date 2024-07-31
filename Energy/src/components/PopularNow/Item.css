@@ -1,40 +1,56 @@
-
 .popular-item-container {
-    margin: 10px; 
-    background-color: white; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    border-radius: 10px; 
-    text-align: center; 
+    margin: 15px;
+    background-color: #fff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: 0.5s;
-
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    overflow: hidden;
 }
 
 .popular-item-container:hover {
-    transform: scale(1.04);
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .popular-item-container img {
     width: 100%;
     height: auto;
-    max-width: 300px; 
-    max-height: 300px;
-    object-fit: cover; 
-    border-radius: 10px; 
+    max-width: 280px;
+    max-height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.popular-item-container img:hover {
+    transform: scale(1.02);
 }
 
 .popular-item-container h2 {
-    margin: 15px 0 10px; 
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #000000;
+    margin: 20px 0 10px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.popular-item-container:hover h2 {
+    color: #00796b;
 }
 
 .popular-item-container b {
-    font-size: 1.2rem;
-    color: #000000;
+    font-size: 1.3rem;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.popular-item-container:hover b {
+    color: #00796b;
 }
