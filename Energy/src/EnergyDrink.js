@@ -14,14 +14,14 @@ const drinks = [
   },
   {
     id: 2,
-    name: "Adrenaline",
+    name: "ADRENALINE",
     sizes: [250, 500],
  
     price: "1,58",
     images: [
-      "Adrenaline.jpg",
+      "ADRENALINE.jpg",
     ],
-    title: "Adrenaline",
+    title: "ADRENALINE",
    
   },
   {
@@ -71,6 +71,32 @@ const drinks = [
     ],
     title: "WR-UP",
    
+  },
+  {
+    id: 7,
+    name: "drive",
+    sizes: [250, 500],
+    price: "0,94",
+    title: "drive",
+  
+    images: [
+      "drive.jpg",
+    ],
+
+  
+  },
+  {
+    id: 8,
+    name: "gorilla",
+    sizes: [250, 500],
+    price: "0,85",
+    title: "gorilla",
+  
+    images: [
+      "gorilla.jpg",
+    ],
+
+  
   },
  
     

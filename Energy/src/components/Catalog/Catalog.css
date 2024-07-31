@@ -20,7 +20,7 @@
   .filter-list-container {
     display: flex;
     flex-direction: row;
-    gap: 100px;
+    gap: 1px;
     padding: 10px;
     margin-left: auto;
   }
