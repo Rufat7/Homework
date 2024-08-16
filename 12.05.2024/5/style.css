@@ -1,0 +1,12 @@
+html, body{
+    background-color: bisque;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.book .book-title{
+    color: black;
+}
