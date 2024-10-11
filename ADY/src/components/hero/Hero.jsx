@@ -9,8 +9,8 @@ const Hero = () => {
             scale: 1,
         },
         animate: {
-            x: "35%",
-            scale: 1.1,
+            x: "25%",
+            scale: 1.4,
             transition: {
                 duration: 3,
                 ease: "easeInOut",
