@@ -3,7 +3,8 @@ import { FaStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Train from '../../assets/train6.png';
 import Destination from '../destination/Destination';
-
+import DepartTime from "../departtime/DepartTime";
+import Seat from "../seat/Seat"
 
 
 
@@ -17,7 +18,7 @@ const Detail = () => {
                         <h1 className="text-4xl font-bold text-neutral-900 dark:text-neutral-50">
                             Luxury Train
                             <span className="text-base font-normal text-neutral-400 dark:text-neutral-500 ml-3">
-                                (Train Number Plate)
+                                1518
                             </span>
                         </h1>
 
@@ -30,7 +31,7 @@ const Detail = () => {
                                 <FaStar />
                             </div>
                             <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
-                                (4.5)
+                                (5.0)
                             </p>
                         </div>
                         <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
@@ -41,12 +42,12 @@ const Detail = () => {
                 </div>
                 <div className="col-span-1 space-y-10">
                     <div className="space-y-6">
-                        {}
+                        
                         <Destination />
-                        {}
+                     <DepartTime/>
+                     <Seat/>
                     </div>
-                    {}
-                    {}
+
                     <div className="flex">
                         <Link to={'/train/train-details/checkout'} className='w-fit bg-violet-600 text neutral-50 font-medium text-base px-6 py-2 rounded-md hover:bg-violet-700 ease-in-out duration-300'>
                             Processed to Checkout

@@ -5,6 +5,7 @@ import Footer from './components/footer/Footer';
 import Home from './components/home/Home';
 import Train from './components/train/Train';
 import Detail from './components/train/Detail';
+import Checkout from './components/checkout/Checkout';
 
 function App() {
 
@@ -17,7 +18,9 @@ function App() {
           <Routes> 
             <Route path="/" element={<Home/>} /> 
             <Route path="/train" element={<Train/>} />
-            <Route path="/train/train-details" element={<Detail/>} /> 
+            <Route path="/train/train-details" element={<Detail/>} />
+            <Route path="/train/train-details/checkout" element={<Checkout/>} />
+          
           </Routes>
         
            <Footer />

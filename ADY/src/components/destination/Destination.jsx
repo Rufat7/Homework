@@ -31,9 +31,9 @@ const Destination = () => {
                                 id="from" 
                                 className="w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 inline-block bg-neutral-200/60 dark:bg-neutral-900/60 px-3 h-11 border border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-900">
                                 <option value="">Select Location</option>
-                                <option value="baku">Baku</option>
-                                <option value="ucar">Ucar</option>
-                                <option value="agdas">Agdas</option>
+                                <option value="Baku">Baku</option>
+                                <option value="Ucar">Ucar</option>
+                                <option value="Agdas">Agdas</option>
                             </select>
                         </div>
                         
@@ -48,9 +48,9 @@ const Destination = () => {
                                 id="to" 
                                 className="w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 inline-block bg-neutral-200/60 dark:bg-neutral-900/60 px-3 h-11 border border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-900">
                                 <option value="">Select Destination</option>
-                                <option value="baku">Baku</option>
-                                <option value="ucar">Ucar</option>
-                                <option value="agdas">Agdas</option>
+                                <option value="Gence">Gence</option>
+                                <option value="Tovuz">Tovuz</option>
+                                <option value="Agstafa">Agstafa</option>
                             </select>
                         </div>
                     </div>
@@ -65,7 +65,7 @@ const Destination = () => {
                                 From: <span className="ml-1.5 font-medium">{from}</span>
                             </div>
                             <div className="flex-1">
-                                <div className="w-full h-[1px] border border-dashed border-neutral-200 dark:border-neutral-800/80"></div>
+                               
                                 <div className="w-fit text-base font-semibold">
                                     To: <span className="ml-1.5 font-medium">{to}</span>
                                 </div>

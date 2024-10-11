@@ -1,14 +1,16 @@
 import React from 'react';
-import Train2 from "../../assets/train6.png";
+import Train2 from "../../assets/9.png";
 import { motion } from 'framer-motion';
-
+import { Link } from 'react-router-dom';
 const Hero = () => {
     const imageVariants = {
         initial: {
             x: "100%",
+            scale: 1,
         },
         animate: {
-            x: "3%",
+            x: "35%",
+            scale: 1.1,
             transition: {
                 duration: 3,
                 ease: "easeInOut",
@@ -46,13 +48,14 @@ const Hero = () => {
                         </motion.p>
                     </motion.div>
 
-                    <motion.button className="w-fit bg-violet-700 hover:bg-violet-800 text-neutral-50 font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-md ease-in-out duration-300">
+                    <Link to={'/train'} className='w-fit bg-violet-600 text neutral-50 font-medium text-base px-6 py-2 rounded-md hover:bg-violet-700 ease-in-out duration-300'>
                         Reserve Seat
-                    </motion.button>
+                    </Link>
                 </motion.div>
 
                 <div className="lg:w-[70%] w-full h-full rounded-md flex items-end justify-end relative lg:static">
-                    <motion.img className="w-full max-h-[60%] object-contain"
+                    <motion.img className="w-full max-h-[60%] object-contain relative"
+                        style={{ top: '-180px' }} 
                         src={Train2}
                         alt='train img'
                         initial="initial"
