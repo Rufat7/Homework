@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './About.css'; // стили для анимации текста
 
 const About = ({ theme }) => {
   const isDarkTheme = theme === 'dark';
@@ -20,12 +21,13 @@ const About = ({ theme }) => {
       fontWeight: 'bold',
       textAlign: 'center',
       marginBottom: '20px',
-      color: '#6a0dad', 
+      color: '#6a0dad',
+      animation: 'fadeIn 1.5s ease-in-out', // добавление анимации
     },
     section: {
       margin: '20px 0',
       lineHeight: '1.6',
-      backgroundColor: isDarkTheme ? '#222' : '#f9f9f9',
+      backgroundColor: isDarkTheme ? '#222' : '#d3d3d3',
       padding: '20px',
       borderRadius: '8px',
       boxShadow: isDarkTheme ? '0 2px 8px rgba(255, 255, 255, 0.1)' : '0 2px 8px rgba(0, 0, 0, 0.1)',
@@ -38,7 +40,7 @@ const About = ({ theme }) => {
     advantage: {
       padding: '20px',
       borderRadius: '8px',
-      backgroundColor: isDarkTheme ? '#333' : '#ffffff',
+      backgroundColor: '#d3d3d3',
       boxShadow: isDarkTheme ? '0 2px 8px rgba(255, 255, 255, 0.1)' : '0 2px 8px rgba(0, 0, 0, 0.1)',
       transition: 'transform 0.2s, box-shadow 0.2s',
       cursor: 'pointer',
@@ -50,7 +52,7 @@ const About = ({ theme }) => {
     advantageTitle: {
       fontSize: '1.5rem',
       margin: '0 0 10px 0',
-      color: '#6a0dad', 
+      color: '#6a0dad',
     },
     advantageText: {
       margin: '0',
@@ -64,7 +66,7 @@ const About = ({ theme }) => {
     trainTypeCard: {
       padding: '20px',
       borderRadius: '8px',
-      backgroundColor: isDarkTheme ? '#444' : '#eaeaea',
+      backgroundColor: '#d3d3d3',
       boxShadow: isDarkTheme ? '0 2px 8px rgba(255, 255, 255, 0.1)' : '0 2px 8px rgba(0, 0, 0, 0.1)',
       transition: 'transform 0.2s, box-shadow 0.2s',
       cursor: 'pointer',
@@ -76,7 +78,7 @@ const About = ({ theme }) => {
     trainTypeTitle: {
       fontSize: '1.5rem',
       margin: '10px 0',
-      color: '#6a0dad', 
+      color: '#6a0dad',
     },
     trainTypeDescription: {
       marginTop: '10px',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa'; 
 
+
 const Checkout = () => {
   return (
     <div className='w-full lg:px-28 md:px-16 sm:px-7 px-4 mt-[13ch] mb-[8ch] space-y-10 '>
@@ -81,13 +82,13 @@ const Checkout = () => {
 
                 <div className="w-full flex items-center gap-x-3">
                   <div className="w-fit text-base font-medium">
-                    From:- <span className="ml-1.5">Location 1</span>
+                    From:- <span className="ml-1.5">from</span>
                   </div>
                   <div className="flex-1">
                     <div className="w-full h-[1px] border border-dashed border-neutral-400 dark:border-neutral-700/80"></div>
                   </div>
                   <div className="w-fit text-base font-medium">
-                    To:- <span className="ml-1.5">Location 4</span>
+                    To:- <span className="ml-1.5">to</span>
                   </div>
                 </div>
 
