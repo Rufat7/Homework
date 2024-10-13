@@ -2,6 +2,7 @@ import React from 'react';
 import Train2 from "../../assets/9.png";
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+
 const Hero = () => {
     const imageVariants = {
         initial: {
@@ -9,7 +10,7 @@ const Hero = () => {
             scale: 1,
         },
         animate: {
-            x: "25%",
+            x: "35%",
             scale: 1.4,
             transition: {
                 duration: 3,
@@ -19,7 +20,7 @@ const Hero = () => {
     };
 
     return (
-        <div className='w-full h-[calc(100vh-8ch)] lg:px-28 md:px-16 sm:px-7 px-4 mt-[8ch] flex items-center justify-center flex-col hero relative'>
+        <div className='w-full h-[calc(100vh-2ch)] lg:px-28 md:px-16 sm:px-7 px-4 mt-[0] flex items-center justify-center flex-col hero relative'>
             <div className="flex-1 w-full flex flex-col lg:flex-row items-stretch justify-between gap-12 pb-10">
                 <motion.div className="lg:w-[35%] w-full h-auto rounded-md flex justify-center flex-col space-y-8 lg:space-y-14"
                     initial={{ opacity: 0, y: -10 }}
@@ -54,8 +55,8 @@ const Hero = () => {
                 </motion.div>
 
                 <div className="lg:w-[70%] w-full h-full rounded-md flex items-end justify-end relative lg:static">
-                    <motion.img className="w-full max-h-[60%] object-contain relative"
-                        style={{ top: '-180px' }} 
+                    <motion.img className="w-full max-h-[60%] object-contain"
+                        style={{ position: 'absolute', top: '120px' }} 
                         src={Train2}
                         alt='train img'
                         initial="initial"
