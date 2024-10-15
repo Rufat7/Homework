@@ -9,7 +9,7 @@ const About = ({ theme }) => {
       padding: '40px',
       fontFamily: 'Arial, sans-serif',
       backgroundColor: 'transparent',
-      color: isDarkTheme ? '#8c8c8c' : '#333333',
+      color: isDarkTheme ? '#e0e0e0' : '#333333',
       marginTop: '70px',
       display: 'flex',
       flexDirection: 'column',
@@ -22,7 +22,10 @@ const About = ({ theme }) => {
       textAlign: 'center',
       marginBottom: '20px',
       color: '#6a0dad',
-      animation: 'fadeIn 1.5s ease-in-out', // добавление анимации
+      animation: 'fadeIn 1.5s ease-in-out',
+      padding: '10px',
+      borderRadius: '8px',
+      backgroundColor: isDarkTheme ? '#3a3a3d' : '#d3d3d3', // Фон для заголовков
     },
     section: {
       margin: '20px 0',
@@ -40,10 +43,11 @@ const About = ({ theme }) => {
     advantage: {
       padding: '20px',
       borderRadius: '8px',
-      backgroundColor: '#d3d3d3',
+      backgroundColor: isDarkTheme ? '#3a3a3d' : '#d3d3d3',
       boxShadow: isDarkTheme ? '0 2px 8px rgba(255, 255, 255, 0.1)' : '0 2px 8px rgba(0, 0, 0, 0.1)',
       transition: 'transform 0.2s, box-shadow 0.2s',
       cursor: 'pointer',
+      color: isDarkTheme ? '#e0e0e0' : '#333333',
     },
     advantageHover: {
       transform: 'scale(1.05)',
@@ -66,10 +70,11 @@ const About = ({ theme }) => {
     trainTypeCard: {
       padding: '20px',
       borderRadius: '8px',
-      backgroundColor: '#d3d3d3',
+      backgroundColor: isDarkTheme ? '#3a3a3d' : '#d3d3d3',
       boxShadow: isDarkTheme ? '0 2px 8px rgba(255, 255, 255, 0.1)' : '0 2px 8px rgba(0, 0, 0, 0.1)',
       transition: 'transform 0.2s, box-shadow 0.2s',
       cursor: 'pointer',
+      color: isDarkTheme ? '#e0e0e0' : '#333333',
     },
     trainTypeHover: {
       transform: 'scale(1.05)',
@@ -89,7 +94,7 @@ const About = ({ theme }) => {
   const [hoveredTrainType, setHoveredTrainType] = useState(null);
 
   return (
-    <section style={styles.container}>
+    <section className={isDarkTheme ? 'dark' : ''} style={styles.container}>
       <h1 style={styles.title}>Meet the Trains</h1>
       <div style={styles.section}>
         <p>
