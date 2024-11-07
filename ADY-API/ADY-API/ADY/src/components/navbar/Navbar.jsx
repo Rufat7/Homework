@@ -60,16 +60,11 @@ const Navbar = () => {
                 
                 </ul>
 
-                <div className='navbar-link'>
-                    
-                    <button onClick={() => changeLanguage('en')}>En</button>
-                    
-                </div>
-                
-                <div className='navbar-link'>
-                    <button onClick={() => changeLanguage('ru')}>Ru</button>
-                </div>
-                
+                <div className='navbar-link language-toggle'>
+    <button  onClick={() => changeLanguage('en')} className="language-button ">EN</button>
+    <button onClick={() => changeLanguage('ru')} className="language-button">RU</button>
+</div>
+
 
                 <div className="navbar-contact">
                     <div className="contact-box">

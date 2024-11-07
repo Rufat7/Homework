@@ -2,8 +2,17 @@ import { useState } from 'react'
 import React from 'react'
 import { GiSteeringWheel } from 'react-icons/gi'
 import { MdOutlineChair } from 'react-icons/md'
+import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 
 const Seat = ({isSelected, onClick}) => {
+
+    const { t, i18n } = useTranslation();
+
+    const changeLanguage = (language) => {
+        i18n.changeLanguage(language);
+    };
+    
   return (
         <MdOutlineChair className={`text-3xl -rotate-90 cursor-pointer ${isSelected ? 'text-violet-600' : 'text-neutral-600' }`} onClick={onClick}/>
  
@@ -46,7 +55,7 @@ const renderSeats = () => {
  return (
  <div className='space-y-5'>
     <h2 className="text-xl text-neutral-800 dark:text-neutral-100 font-medium">
-     Choose a Seat
+     {t("choose a seat")}
     </h2>
  
 
@@ -84,21 +93,21 @@ const renderSeats = () => {
     <div className="flex items-center gap-x-2">
         <MdOutlineChair className='text-lg text-neutral-500 -rotate-90' />
         <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
-            - Available
+            - {t("available")}
         </p>
     </div>
 
     <div className="flex items-center gap-x-2">
         <MdOutlineChair className='text-lg text-red-500 -rotate-90' />
         <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
-            - Booked
+            - {t("booked")}
         </p>
     </div>
 
     <div className="flex items-center gap-x-2">
         <MdOutlineChair className='text-lg text-violet-500 -rotate-90' />
         <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
-            - Selected
+            - {t("selected")}
         </p>
     </div>
 </div>
@@ -113,7 +122,7 @@ const renderSeats = () => {
  selectedSeats.length > 0 &&
 <div className="!mt-10">
 <h3 className="text-lg font-bold">
-Selected Seats:
+{t("selected seats:")}
 </h3>
 <div className="flex flex-wrap">
 {selectedSeats.map(seat => (
@@ -130,7 +139,7 @@ Selected Seats:
 selectedSeats.length > 0 &&
 <div className="!mt-5 flex items-center gap-x-1">
 <h3 className="text-lg font-bold">
-Total Price:
+{t("total price:")}
 </h3>
 <p className="text-lg font-medium">
 {selectedSeats.length * 15}$

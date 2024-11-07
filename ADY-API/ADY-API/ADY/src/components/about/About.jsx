@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './About.css'; // стили для анимации текста
+import './About.css'; 
 
 const About = ({ theme }) => {
   const isDarkTheme = theme === 'dark';
@@ -22,7 +22,7 @@ const About = ({ theme }) => {
       textAlign: 'center',
       marginBottom: '20px',
       color: '#6a0dad',
-      animation: 'fadeIn 1.5s ease-in-out', // добавление анимации
+      animation: 'fadeIn 1.5s ease-in-out', 
     },
     section: {
       margin: '20px 0',

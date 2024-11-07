@@ -26,9 +26,9 @@ const Hero = () => {
     };
 
     return (
-        <div className='w-full h-[calc(100vh-8ch)] lg:px-28 md:px-16 sm:px-7 px-4 mt-[8ch] flex items-center justify-center flex-col hero relative'>
-            <div className="flex-1 w-full flex flex-col lg:flex-row items-stretch justify-between gap-5 pb-10">
-                <motion.div className="lg:w-[35%] w-full h-auto rounded-md flex justify-center flex-col space-y-8 lg:space-y-8"
+        <div className='w-full h-[calc(100vh-8ch)] lg:px-28 md:px-16 sm:px-7  mt-[8ch] flex items-center justify-center flex-col hero relative'>
+            <div className="flex-1 w-full flex flex-col lg:flex-row items-stretch justify-between gap-5 pb-5">
+                <motion.div className="lg:w-[35%] w-full h-auto rounded-md flex justify-center flex-col space-y-8 lg:space-y-4"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease: 'linear', delay: 0.2 }}
@@ -46,7 +46,7 @@ const Hero = () => {
                              {t("reserve1")}
                             <span className="text-violet-600 tracking-wider"> {t("reserve3")}</span>
                         </motion.h1>
-                        <motion.p className="text-sm sm:text-lg font-normal text-neutral-300 line-clamp-3 text-ellipsis text-center md:text-left"
+                        <motion.p className="text-sm sm:text-lg font-normal text-neutral-300 line-clamp-4 text-ellipsis text-center md:text-left"
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 2, ease: 'linear', delay: 0.6 }}
