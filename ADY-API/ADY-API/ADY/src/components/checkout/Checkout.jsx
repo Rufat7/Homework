@@ -42,7 +42,7 @@ const Checkout = () => {
                 className="w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 inline-block bg-neutral-200/60 dark:bg-neutral-900/60 px-3 h-12 border border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-900"
               />
               <small className="block mt-1 text-xs text-neutral-500 dark:text-neutral-600 font-normal">
-                You will get your tickets via this email address.
+                {t("You will get your tickets via this email address.")}
               </small>
             </div>
             <div className="">

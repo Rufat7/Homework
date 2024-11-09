@@ -112,7 +112,7 @@ const Detail = () => {
                             to={'/train/train-details/checkout'} 
                             className='w-fit bg-violet-600 text-neutral-50 font-medium text-base px-6 py-2 rounded-md hover:bg-violet-700 ease-in-out duration-300 ml-8' 
                         >
-                            Buy
+                            {t("buy")}
                         </Link>                       
                     </div>
                 </div>
