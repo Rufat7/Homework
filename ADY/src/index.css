@@ -37,9 +37,8 @@
 
 .hero {
   background: linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.05)), url("./assets/62.png");
-background-size: 100% 100%; /* Изображение будет растягиваться по обеим осям, заполняя контейнер */
-background-position: center center; /* Центрируем изображение */
+background-size: 100% 100%; 
+background-position: center center; 
 background-repeat: no-repeat;
 
 }
-

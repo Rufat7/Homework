@@ -33,8 +33,8 @@ const Offer = () => {
   return (
     <div className='w-full lg:px-28 md:px-16 sm:px-7 px-4 mb-[8ch]'>
       <div className="w-full items-center flex justify-between">
-        <h1 className="text-2xl font-medium mb-6">{t('offer')}</h1>
-        <Link to={"/offer"} className='text-[#1d5c87]'>{t('view all')}</Link>
+        <h1 className="text-2xl font-medium mb-6 dark:text-white text-black">{t('offer')}</h1>
+     
       </div>
       <div className="grid grid-cols-2 gap-16">
         {offers.map((offer, index) => (

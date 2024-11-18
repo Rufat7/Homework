@@ -59,7 +59,7 @@ const Hero = () => {
                         </motion.p>
                     </motion.div>
 
-                    <Link to={'/train'}  style={{ background: '#1d5c87' }} className='w-fit text neutral-50 font-medium text-base px-6 py-3 rounded-md hover:bg-violet-700 ease-in-out duration-300'>
+                    <Link to={'/train'}  style={{ background: '#1d5c87' }} className='w-fit text neutral-50 font-medium text-base px-6 py-3 rounded-md  text-white ease-in-out duration-300'>
                         {t("reserve2")}
                     </Link>
                 </motion.div>

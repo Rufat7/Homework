@@ -100,7 +100,7 @@
 }
 
 .navbar-link:hover {
-    color: #1d5c87; /* Изменено на #1d5c87 */
+    color: #979797; 
 }
 
 .dark .navbar-link {
@@ -108,9 +108,8 @@
 }
 
 .dark .navbar-link:hover {
-    color: #1d5c87; /* Изменено на #1d5c87 */
+    color: #979797; 
 }
-
 .navbar-contact {
     display: flex;
     flex-direction: column;
@@ -130,7 +129,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    background-color: #dbdbdb;
+    background-color: #ffffff;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
     cursor: pointer;
@@ -169,7 +168,7 @@
 }
 
 .login-button:hover {
-    color: #1d5c87; /* Изменено на #1d5c87 */
+    color: #979797; 
 }
 
 .theme-toggle {
@@ -190,7 +189,7 @@
 }
 
 .language-button {
-    background-color: #dbdbdb;
+    background-color: #ffffff;
     color: #153f5c;
     border: none;
     border-radius: 20px;
@@ -214,13 +213,13 @@
 }
 
 .language-button:hover {
-    background-color: #1d5c87; /* Изменено на #1d5c87 */
+   
     transform: scale(1.05);
 }
 
 .language-button:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(29, 92, 135, 0.4); /* Изменено на #1d5c87 */
+    
 }
 
 .language-button.active::after {

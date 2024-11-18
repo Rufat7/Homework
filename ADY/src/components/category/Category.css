@@ -59,7 +59,7 @@
 }
 
 .dark .category-item {
-    background-color: #1d5c87;
+    background-color: rgb(39 39 42 / 0.2);
 }
 
 
@@ -96,7 +96,7 @@ background: rgb(39 39 42 / 0.2);
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
-    color: #1d5c87;
+    color: #111827;
 }
 
 .dark .train-name {
