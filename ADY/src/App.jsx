@@ -7,8 +7,10 @@ import Train from './components/train/Train';
 import Detail from './components/detail/Detail';
 import Checkout from './components/checkout/Checkout';
 import About from './components/about/About';
+import ChatBot from './components/chatbot/ChatBot';
 import Category from './components/category/Category';
 import { TripProvider } from './context/TripContext'; 
+import Dashboard from './components/dashboard/DashBoard';
 
 function App() {
 
@@ -26,8 +28,9 @@ function App() {
             <Route path="/checkout" element={<Checkout/>} />
             <Route path="/about" element={<About/>} />
             <Route path="/category" element={<Category/>} />
+            <Route path="/dashboard" element={<Dashboard/>} />
           </Routes>
-        
+          <ChatBot/>
            <Footer />
         </div>
       </Router>
