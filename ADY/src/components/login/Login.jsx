@@ -52,21 +52,14 @@ export default function Login({ onClose, openRegister }) {
         if (response.ok) {
           const user = await response.json();
         
-          localStorage.setItem("user", JSON.stringify(user));
-
-          
-          const userDataResponse = await fetch(`https://localhost:7261/api/Users/GetUserData?email=${formData.email}`);
-          if (userDataResponse.ok) {
-            const userData = await userDataResponse.json();
-            localStorage.setItem("userData", JSON.stringify(userData)); 
-          }
+      
+          localStorage.setItem("user", JSON.stringify(user)); 
+          localStorage.setItem("userData", JSON.stringify(user)); 
 
           alert("Login successful");
           navigate("/dashboard"); 
-        } else if (response.status === 204) {
-          setLoginError("Incorrect email or password");
         } else {
-          setLoginError("Server error, please try again later.");
+          setLoginError("Incorrect email or password");
         }
       } catch (error) {
         setIsLoading(false);

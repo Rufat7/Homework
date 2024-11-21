@@ -29,14 +29,14 @@ export default function Register({ onClose, openLogin }) {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.firstName) newErrors.firstName = "Пожалуйста, введите имя";
-    if (!formData.lastName) newErrors.lastName = "Пожалуйста, введите фамилию";
-    if (!formData.email) newErrors.email = "Пожалуйста, введите email";
-    if (!formData.password) newErrors.password = "Пожалуйста, введите пароль";
+    if (!formData.firstName) newErrors.firstName = "Please enter your first name";
+    if (!formData.lastName) newErrors.lastName = "Please enter your last name";
+    if (!formData.email) newErrors.email = "Please enter your email";
+    if (!formData.password) newErrors.password = "Please enter your password";
     if (!formData.confirmPassword)
-      newErrors.confirmPassword = "Пожалуйста, подтвердите пароль";
+      newErrors.confirmPassword = "Please confirm your password";
     else if (formData.password !== formData.confirmPassword)
-      newErrors.confirmPassword = "Пароли не совпадают";
+      newErrors.confirmPassword = "Passwords do not match";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -59,16 +59,16 @@ export default function Register({ onClose, openLogin }) {
         setIsLoading(false);
 
         if (response.ok) {
-          alert("Регистрация успешна");
+          alert("Registration successful");
           onClose();
           openLogin();
         } else {
           const errorData = await response.json();
-          setRegisterError(errorData.message || "Ошибка регистрации. Попробуйте позже.");
+          setRegisterError(errorData.message || "Registration error. Please try again later.");
         }
       } catch (error) {
         setIsLoading(false);
-        setRegisterError("Ошибка при соединении с сервером");
+        setRegisterError("Connection error");
       }
     }
   };
@@ -80,12 +80,12 @@ export default function Register({ onClose, openLogin }) {
           <img src={x} alt="close-btn" />
         </button>
         <div className="modal-window-container">
-          <h1>Регистрация</h1>
+          <h1>Register</h1>
           <input
             type="text"
             name="firstName"
             value={formData.firstName}
-            placeholder="Имя"
+            placeholder="First Name"
             onChange={handleInputChange}
           />
           {errors.firstName && <span className="error">{errors.firstName}</span>}
@@ -94,7 +94,7 @@ export default function Register({ onClose, openLogin }) {
             type="text"
             name="lastName"
             value={formData.lastName}
-            placeholder="Фамилия"
+            placeholder="Last Name"
             onChange={handleInputChange}
           />
           {errors.lastName && <span className="error">{errors.lastName}</span>}
@@ -112,7 +112,7 @@ export default function Register({ onClose, openLogin }) {
             type="password"
             name="password"
             value={formData.password}
-            placeholder="Пароль"
+            placeholder="Password"
             onChange={handleInputChange}
           />
           {errors.password && <span className="error">{errors.password}</span>}
@@ -121,7 +121,7 @@ export default function Register({ onClose, openLogin }) {
             type="password"
             name="confirmPassword"
             value={formData.confirmPassword}
-            placeholder="Подтвердите пароль"
+            placeholder="Confirm Password"
             onChange={handleInputChange}
           />
           {errors.confirmPassword && (
@@ -131,7 +131,7 @@ export default function Register({ onClose, openLogin }) {
           {registerError && <span className="error">{registerError}</span>}
 
           <button className="register-button" onClick={handleSubmit} disabled={isLoading}>
-            {isLoading ? "Загрузка..." : "Зарегистрироваться"}
+            {isLoading ? "Loading..." : "Register"}
           </button>
 
           <button
@@ -141,7 +141,7 @@ export default function Register({ onClose, openLogin }) {
               openLogin();
             }}
           >
-            Уже есть аккаунт? Войти
+            Already have an account? Login
           </button>
         </div>
       </div>

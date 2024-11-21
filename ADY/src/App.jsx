@@ -11,6 +11,7 @@ import ChatBot from './components/chatbot/ChatBot';
 import Category from './components/category/Category';
 import { TripProvider } from './context/TripContext'; 
 import Dashboard from './components/dashboard/DashBoard';
+import  Ticket  from './components/ticket/Ticket';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/about" element={<About/>} />
             <Route path="/category" element={<Category/>} />
             <Route path="/dashboard" element={<Dashboard/>} />
+            <Route path="/ticket" element={<Ticket/>} />
           </Routes>
           <ChatBot/>
            <Footer />
