@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import x from "../../assets/x.svg";
-import "./Login.css";
+import x from "../../assets/x.svg"; 
+import "./Login.css"; 
 import { useNavigate } from "react-router-dom";
 
-export default function Login({ onClose, openRegister }) {
+export default function Login({ openRegister, onLoginSuccess }) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -51,13 +51,11 @@ export default function Login({ onClose, openRegister }) {
 
         if (response.ok) {
           const user = await response.json();
-        
-      
           localStorage.setItem("user", JSON.stringify(user)); 
-          localStorage.setItem("userData", JSON.stringify(user)); 
 
           alert("Login successful");
-          navigate("/dashboard"); 
+          onLoginSuccess(); 
+          navigate("/dashboard");
         } else {
           setLoginError("Incorrect email or password");
         }
@@ -71,9 +69,8 @@ export default function Login({ onClose, openRegister }) {
   return (
     <div className="modal-overlay">
       <div className="modal-window">
-        <button className="close-modal" onClick={onClose}>
-          <img src={x} alt="close-btn" />
-        </button>
+        
+
         <div className="modal-right-left-container">
           <h1>Login</h1>
           <input
@@ -93,15 +90,18 @@ export default function Login({ onClose, openRegister }) {
           />
           {errors.password && <span className="error">{errors.password}</span>}
           {loginError && <span className="error">{loginError}</span>}
-          <button className="log-in-button" onClick={handleSubmit} disabled={isLoading}>
+
+          <button
+            className="log-in-button"
+            onClick={handleSubmit}
+            disabled={isLoading}
+          >
             {isLoading ? "Loading..." : "Log In"}
           </button>
+
           <button
             className="to-registration-button"
-            onClick={() => {
-              onClose();
-              openRegister();
-            }}
+            onClick={openRegister}
           >
             Register
           </button>

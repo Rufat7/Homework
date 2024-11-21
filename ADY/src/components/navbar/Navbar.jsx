@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import Logo from "../../assets/ADY6.png";
-import { FaPhone, FaUser } from 'react-icons/fa6';
+import { FaPhone, FaUser, FaArrowLeft } from 'react-icons/fa6';  
 import Theme from '../theme/Theme';
 import './Navbar.css'; 
 import { useTranslation } from 'react-i18next';
@@ -16,7 +16,6 @@ const Navbar = () => {
     const navigate = useNavigate(); 
 
     useEffect(() => {
-        
         const user = localStorage.getItem('user'); 
         if (user) {
             setIsAuthenticated(true);
@@ -49,13 +48,17 @@ const Navbar = () => {
         setIsAuthenticated(true); 
         localStorage.setItem('user', 'true'); 
         navigate('/dashboard'); 
-        closeLogin();
+        closeLogin(); 
     };
 
     const handleLogout = () => {
         setIsAuthenticated(false); 
         localStorage.removeItem('user'); 
         navigate('/');
+    };
+
+    const goToDashboard = () => {
+        navigate('/dashboard');  
     };
 
     return (
@@ -106,9 +109,14 @@ const Navbar = () => {
 
                 <div className="navbar-actions">
                     {isAuthenticated ? (
-                        <button onClick={handleLogout} className="logout-button">
-                            Выйти
-                        </button>
+                        <>
+                            <button onClick={goToDashboard} className="dashboard-button">
+                                <FaArrowLeft />
+                            </button>
+                            <button onClick={handleLogout} className="logout-button">
+                                Выйти
+                            </button>
+                        </>
                     ) : (
                         <button onClick={openLogin} className="login-button">
                             <FaUser />

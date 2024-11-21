@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import x from "../../assets/x.svg";
 import "./Register.css";
 
-export default function Register({ onClose, openLogin }) {
+export default function Register({ openLogin }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -60,7 +59,6 @@ export default function Register({ onClose, openLogin }) {
 
         if (response.ok) {
           alert("Registration successful");
-          onClose();
           openLogin();
         } else {
           const errorData = await response.json();
@@ -76,9 +74,6 @@ export default function Register({ onClose, openLogin }) {
   return (
     <div className="modal-overlay">
       <div className="modal-window">
-        <button className="close-modal" onClick={onClose}>
-          <img src={x} alt="close-btn" />
-        </button>
         <div className="modal-window-container">
           <h1>Register</h1>
           <input
@@ -87,6 +82,7 @@ export default function Register({ onClose, openLogin }) {
             value={formData.firstName}
             placeholder="First Name"
             onChange={handleInputChange}
+            className="input-field" 
           />
           {errors.firstName && <span className="error">{errors.firstName}</span>}
 
@@ -96,6 +92,7 @@ export default function Register({ onClose, openLogin }) {
             value={formData.lastName}
             placeholder="Last Name"
             onChange={handleInputChange}
+            className="input-field"
           />
           {errors.lastName && <span className="error">{errors.lastName}</span>}
 
@@ -105,6 +102,7 @@ export default function Register({ onClose, openLogin }) {
             value={formData.email}
             placeholder="Email"
             onChange={handleInputChange}
+            className="input-field" 
           />
           {errors.email && <span className="error">{errors.email}</span>}
 
@@ -114,6 +112,7 @@ export default function Register({ onClose, openLogin }) {
             value={formData.password}
             placeholder="Password"
             onChange={handleInputChange}
+            className="input-field" 
           />
           {errors.password && <span className="error">{errors.password}</span>}
 
@@ -123,6 +122,7 @@ export default function Register({ onClose, openLogin }) {
             value={formData.confirmPassword}
             placeholder="Confirm Password"
             onChange={handleInputChange}
+            className="input-field" 
           />
           {errors.confirmPassword && (
             <span className="error">{errors.confirmPassword}</span>
@@ -136,10 +136,7 @@ export default function Register({ onClose, openLogin }) {
 
           <button
             className="to-login-button"
-            onClick={() => {
-              onClose();
-              openLogin();
-            }}
+            onClick={openLogin}
           >
             Already have an account? Login
           </button>
