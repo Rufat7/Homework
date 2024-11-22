@@ -78,12 +78,14 @@ export default function Register({ onClose, openLogin }) {
       <div className="modal-window">
         <div className="modal-window-container">
           <h1>Register</h1>
+          
           <input
             type="text"
             name="firstName"
             value={formData.firstName}
             placeholder="First Name"
             onChange={handleInputChange}
+            className="input-field" 
           />
           {errors.firstName && <span className="error">{errors.firstName}</span>}
 
@@ -93,6 +95,7 @@ export default function Register({ onClose, openLogin }) {
             value={formData.lastName}
             placeholder="Last Name"
             onChange={handleInputChange}
+            className="input-field"  
           />
           {errors.lastName && <span className="error">{errors.lastName}</span>}
 
@@ -102,6 +105,7 @@ export default function Register({ onClose, openLogin }) {
             value={formData.email}
             placeholder="Email"
             onChange={handleInputChange}
+            className="input-field"  
           />
           {errors.email && <span className="error">{errors.email}</span>}
 
@@ -111,6 +115,7 @@ export default function Register({ onClose, openLogin }) {
             value={formData.password}
             placeholder="Password"
             onChange={handleInputChange}
+            className="input-field"  
           />
           {errors.password && <span className="error">{errors.password}</span>}
 
@@ -120,6 +125,7 @@ export default function Register({ onClose, openLogin }) {
             value={formData.confirmPassword}
             placeholder="Confirm Password"
             onChange={handleInputChange}
+            className="input-field"  
           />
           {errors.confirmPassword && (
             <span className="error">{errors.confirmPassword}</span>

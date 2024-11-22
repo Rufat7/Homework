@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from "../../assets/ADY6.png";
-import { FaPhone, FaUser } from 'react-icons/fa6';
+import { FaPhone, FaUser, FaSignOutAlt, FaArrowCircleLeft } from 'react-icons/fa';
 import Theme from '../theme/Theme';
 import './Navbar.css';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +15,6 @@ const Navbar = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false); 
     const navigate = useNavigate(); 
 
-    
     useEffect(() => {
         const user = localStorage.getItem('user'); 
         const hasRegistered = localStorage.getItem('hasRegistered'); 
@@ -59,6 +58,10 @@ const Navbar = () => {
         setIsAuthenticated(false); 
         localStorage.removeItem('user'); 
         navigate('/');
+    };
+
+    const goToDashboard = () => {
+        navigate('/dashboard');
     };
 
     return (
@@ -108,13 +111,21 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar-actions">
+                
+                    {isAuthenticated && (
+                        <button onClick={goToDashboard} className="go-to-dashboard-button">
+                            <FaArrowCircleLeft className="icon" />
+                        </button>
+                    )}
+
+              
                     {isAuthenticated ? (
                         <button onClick={handleLogout} className="logout-button">
-                            Выйти
+                            <FaSignOutAlt className="icon" />
                         </button>
                     ) : (
                         <button onClick={openLogin} className="login-button">
-                            <FaUser />
+                            <FaUser className="icon" />
                         </button>
                     )}
                 </div>
