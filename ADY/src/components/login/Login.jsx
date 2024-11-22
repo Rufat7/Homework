@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import x from "../../assets/x.svg";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
 
 export default function Login({ onClose, openRegister, onLoginSuccess }) {
   const [formData, setFormData] = useState({
@@ -16,16 +14,6 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
 
   const [loginError, setLoginError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
-
-  
-  useEffect(() => {
-    const registerState = localStorage.getItem("registerOpen");
-    if (registerState === "true") {
-      openRegister(); 
-    }
-  }, [openRegister]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -58,16 +46,10 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
         setIsLoading(false);
 
         if (response.ok) {
-          const user = await response.json();
-        
-          
-          localStorage.setItem("user", JSON.stringify(user)); 
-          localStorage.setItem("userData", JSON.stringify(user)); 
-
-          alert("Login successful");
           onLoginSuccess(); 
         } else {
-          setLoginError("Incorrect email or password");
+          const errorData = await response.json();
+          setLoginError(errorData.message || "Login error. Please try again later.");
         }
       } catch (error) {
         setIsLoading(false);
@@ -89,6 +71,7 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
             onChange={handleInputChange}
           />
           {errors.email && <span className="error">{errors.email}</span>}
+
           <input
             type="password"
             name="password"
@@ -97,19 +80,21 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
             onChange={handleInputChange}
           />
           {errors.password && <span className="error">{errors.password}</span>}
+
           {loginError && <span className="error">{loginError}</span>}
-          <button className="log-in-button" onClick={handleSubmit} disabled={isLoading}>
-            {isLoading ? "Loading..." : "Log In"}
+
+          <button className="to-register-button" onClick={handleSubmit} disabled={isLoading}>
+            {isLoading ? "Loading..." : "Login"}
           </button>
+
           <button
-            className="to-registration-button"
+            className="to-register-button"
             onClick={() => {
               onClose();
               openRegister();
-              localStorage.setItem("registerOpen", "true"); 
             }}
           >
-            Register
+            Don't have an account? Register
           </button>
         </div>
       </div>
