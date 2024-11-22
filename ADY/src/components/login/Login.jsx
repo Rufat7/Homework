@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Login.css";
 
 export default function Login({ onClose, openRegister, onLoginSuccess }) {
@@ -46,7 +46,12 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
         setIsLoading(false);
 
         if (response.ok) {
-          onLoginSuccess(); 
+          const userData = await response.json(); // Получаем данные пользователя из ответа сервера
+          
+          // Сохраняем данные в localStorage
+          localStorage.setItem('userData', JSON.stringify(userData));
+
+          onLoginSuccess(); // Закрытие окна логина после успешного входа
         } else {
           const errorData = await response.json();
           setLoginError(errorData.message || "Login error. Please try again later.");
@@ -61,7 +66,7 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
   return (
     <div className="modal-overlay">
       <div className="modal-window">
-        <div className="modal-right-left-container">
+        <div className="modal-window-container">
           <h1>Login</h1>
           <input
             type="email"
@@ -83,7 +88,7 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
 
           {loginError && <span className="error">{loginError}</span>}
 
-          <button className="to-register-button" onClick={handleSubmit} disabled={isLoading}>
+          <button className="login-button" onClick={handleSubmit} disabled={isLoading}>
             {isLoading ? "Loading..." : "Login"}
           </button>
 
