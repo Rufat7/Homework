@@ -12,7 +12,7 @@ export default function Dashboard() {
     if (!storedUserData) {
       navigate("/login"); 
     } else {
-    
+      
       setUserData(JSON.parse(storedUserData));
     }
   }, [navigate]);

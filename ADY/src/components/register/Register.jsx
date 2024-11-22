@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import x from "../../assets/x.svg";
 import "./Register.css";
 
-export default function Register({ openLogin }) {
+export default function Register({ onClose, openLogin }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -59,7 +60,8 @@ export default function Register({ openLogin }) {
 
         if (response.ok) {
           alert("Registration successful");
-          openLogin();
+          onClose(); 
+          openLogin(); 
         } else {
           const errorData = await response.json();
           setRegisterError(errorData.message || "Registration error. Please try again later.");
@@ -82,7 +84,6 @@ export default function Register({ openLogin }) {
             value={formData.firstName}
             placeholder="First Name"
             onChange={handleInputChange}
-            className="input-field" 
           />
           {errors.firstName && <span className="error">{errors.firstName}</span>}
 
@@ -92,7 +93,6 @@ export default function Register({ openLogin }) {
             value={formData.lastName}
             placeholder="Last Name"
             onChange={handleInputChange}
-            className="input-field"
           />
           {errors.lastName && <span className="error">{errors.lastName}</span>}
 
@@ -102,7 +102,6 @@ export default function Register({ openLogin }) {
             value={formData.email}
             placeholder="Email"
             onChange={handleInputChange}
-            className="input-field" 
           />
           {errors.email && <span className="error">{errors.email}</span>}
 
@@ -112,7 +111,6 @@ export default function Register({ openLogin }) {
             value={formData.password}
             placeholder="Password"
             onChange={handleInputChange}
-            className="input-field" 
           />
           {errors.password && <span className="error">{errors.password}</span>}
 
@@ -122,7 +120,6 @@ export default function Register({ openLogin }) {
             value={formData.confirmPassword}
             placeholder="Confirm Password"
             onChange={handleInputChange}
-            className="input-field" 
           />
           {errors.confirmPassword && (
             <span className="error">{errors.confirmPassword}</span>
@@ -136,7 +133,10 @@ export default function Register({ openLogin }) {
 
           <button
             className="to-login-button"
-            onClick={openLogin}
+            onClick={() => {
+              onClose();
+              openLogin();
+            }}
           >
             Already have an account? Login
           </button>

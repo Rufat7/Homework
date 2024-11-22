@@ -239,37 +239,3 @@
     align-items: center;
     gap: 20px; 
 }
-
-
-.logout-button {
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.logout-button:hover {
-    color: #979797;
-}
-
-
-.dashboard-button {
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.dashboard-button:hover {
-    color: #979797;
-}

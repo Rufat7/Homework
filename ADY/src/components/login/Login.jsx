@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import x from "../../assets/x.svg"; 
-import "./Login.css"; 
+import React, { useState, useEffect } from "react";
+import x from "../../assets/x.svg";
+import "./Login.css";
 import { useNavigate } from "react-router-dom";
 
-export default function Login({ openRegister, onLoginSuccess }) {
+export default function Login({ onClose, openRegister, onLoginSuccess }) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,6 +18,14 @@ export default function Login({ openRegister, onLoginSuccess }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  
+  useEffect(() => {
+    const registerState = localStorage.getItem("registerOpen");
+    if (registerState === "true") {
+      openRegister(); 
+    }
+  }, [openRegister]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -51,11 +59,13 @@ export default function Login({ openRegister, onLoginSuccess }) {
 
         if (response.ok) {
           const user = await response.json();
+        
+          
           localStorage.setItem("user", JSON.stringify(user)); 
+          localStorage.setItem("userData", JSON.stringify(user)); 
 
           alert("Login successful");
           onLoginSuccess(); 
-          navigate("/dashboard");
         } else {
           setLoginError("Incorrect email or password");
         }
@@ -69,8 +79,6 @@ export default function Login({ openRegister, onLoginSuccess }) {
   return (
     <div className="modal-overlay">
       <div className="modal-window">
-        
-
         <div className="modal-right-left-container">
           <h1>Login</h1>
           <input
@@ -90,18 +98,16 @@ export default function Login({ openRegister, onLoginSuccess }) {
           />
           {errors.password && <span className="error">{errors.password}</span>}
           {loginError && <span className="error">{loginError}</span>}
-
-          <button
-            className="log-in-button"
-            onClick={handleSubmit}
-            disabled={isLoading}
-          >
+          <button className="log-in-button" onClick={handleSubmit} disabled={isLoading}>
             {isLoading ? "Loading..." : "Log In"}
           </button>
-
           <button
             className="to-registration-button"
-            onClick={openRegister}
+            onClick={() => {
+              onClose();
+              openRegister();
+              localStorage.setItem("registerOpen", "true"); 
+            }}
           >
             Register
           </button>

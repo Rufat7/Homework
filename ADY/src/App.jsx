@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
@@ -12,37 +12,49 @@ import Category from './components/category/Category';
 import { TripProvider } from './context/TripContext'; 
 import Dashboard from './components/dashboard/DashBoard';
 import Ticket from './components/ticket/Ticket';
-import Login from './components/login/Login';
-import Register from './components/register/Register';
+import Register from './components/register/Register'; 
+import Login from './components/login/Login'; 
 
 function App() {
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isFirstVisit, setIsFirstVisit] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [registerOpen, setRegisterOpen] = useState(false);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (!user) {
-      setIsRegisterOpen(true);
+    
+    const firstVisit = localStorage.getItem('firstVisit');
+    
+    if (!firstVisit) {
+      
+      setIsFirstVisit(true);
+      localStorage.setItem('firstVisit', 'false'); 
     }
   }, []);
 
-  const openRegister = () => {
-    setIsRegisterOpen(true);
-    setIsLoginOpen(false);
+  const openLogin = () => {
+    setLoginOpen(true);
+    setRegisterOpen(false);
   };
 
-  const openLogin = () => {
-    setIsRegisterOpen(false);
-    setIsLoginOpen(true);
+  const openRegister = () => {
+    setRegisterOpen(true);
+    setLoginOpen(false);
+  };
+
+  const closeLogin = () => {
+    setLoginOpen(false);
+  };
+
+  const closeRegister = () => {
+    setRegisterOpen(false);
   };
 
   return (
     <TripProvider>
       <Router>
-        <div className="w-full min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-300 flex flex-col overflow-hidden">
+        <div className='w-full min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-300 flex flex-col overflow-hidden'>
           <Navbar />
-          {isRegisterOpen && <Register openLogin={openLogin} />}
-          {isLoginOpen && <Login openRegister={openRegister} />}
+          
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/train" element={<Train />} />
@@ -54,6 +66,14 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/ticket" element={<Ticket />} />
           </Routes>
+
+          
+          {isFirstVisit && registerOpen && (
+            <Register onClose={closeRegister} openLogin={openLogin} />
+          )}
+
+          {loginOpen && <Login onClose={closeLogin} openRegister={openRegister} onLoginSuccess={() => setLoginOpen(false)} />}
+          
           <ChatBot />
           <Footer />
         </div>
