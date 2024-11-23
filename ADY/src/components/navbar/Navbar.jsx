@@ -57,7 +57,9 @@ const Navbar = () => {
     const handleLogout = () => {
         setIsAuthenticated(false); 
         localStorage.removeItem('user'); 
-        navigate('/');
+        setRegisterOpen(true); 
+        setLoginOpen(false);
+        navigate('/'); 
     };
 
     const goToDashboard = () => {
@@ -111,14 +113,12 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar-actions">
-                
                     {isAuthenticated && (
                         <button onClick={goToDashboard} className="go-to-dashboard-button">
                             <FaArrowCircleLeft className="icon" />
                         </button>
                     )}
 
-              
                     {isAuthenticated ? (
                         <button onClick={handleLogout} className="logout-button">
                             <FaSignOutAlt className="icon" />

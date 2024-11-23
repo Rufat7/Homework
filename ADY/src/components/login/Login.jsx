@@ -46,12 +46,12 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
         setIsLoading(false);
 
         if (response.ok) {
-          const userData = await response.json(); // Получаем данные пользователя из ответа сервера
+          const userData = await response.json(); 
           
-          // Сохраняем данные в localStorage
+          
           localStorage.setItem('userData', JSON.stringify(userData));
 
-          onLoginSuccess(); // Закрытие окна логина после успешного входа
+          onLoginSuccess(); 
         } else {
           const errorData = await response.json();
           setLoginError(errorData.message || "Login error. Please try again later.");
