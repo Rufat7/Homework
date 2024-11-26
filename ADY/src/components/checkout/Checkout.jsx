@@ -1,198 +1,200 @@
-import React, { useState } from "react";
-import { FaArrowRight } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { GiSteeringWheel } from "react-icons/gi";
+import { MdOutlineChair } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { useTrip } from "../../context/TripContext";
-import axios from "axios";
 
-const Checkout = () => {
-  const { trip, totalPrice } = useTrip();
-  const { t } = useTranslation();
-  const [emailSent, setEmailSent] = useState(false);
-
-  const sendEmail = async (fullname, email, phone) => {
-    try {
-      await axios.post("http://localhost:5000/send-email", {
-        fullname,
-        email,
-        phone,
-        trip,
-        totalPrice,
-      });
-      setEmailSent(true);
-    } catch (error) {
-      console.error("Error sending email:", error);
-      alert(t("Failed to send email"));
-    }
-  };
-
-  if (!trip.from || !trip.to || !trip.date || !trip.time) {
-    return <div>Loading...</div>;
+const Seat = ({ seatNumber, isSelected, isBooked, onClick }) => {
+  let seatColor = "";
+  if (isBooked) {
+    seatColor = "text-red-500";
+  } else if (isSelected) {
+    seatColor = "text-[#1d5c87]";
+  } else {
+    seatColor = "text-neutral-600";
   }
 
   return (
-    <div className="w-full lg:px-28 md:px-16 sm:px-7 px-4 mt-[13ch] mb-[8ch] space-y-10">
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
-        <div className="lg:col-span-3 space-y-7 lg:pr-20">
-          <h2 className="text-xl text-neutral-800 dark:text-neutral-100 font-medium">
-            {t("passenger information")}
-          </h2>
-          <form
-            className="space-y-6"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const fullname = e.target.fullname.value;
-              const email = e.target.email.value;
-              const phone = e.target.phone.value;
-              sendEmail(fullname, email, phone);
-            }}
-          >
-            <div>
-              <label htmlFor="fullname" className="block mb-2 font-semibold">
-                {t("fullname")}
-              </label>
-              <input
-                type="text"
-                id="fullname"
-                name="fullname"
-                className="w-full px-4 py-3 bg-neutral-200/60 dark:bg-neutral-900/60 border border-neutral-300 dark:border-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1d5c87] transition-all duration-200"
-                placeholder={t("Enter Full Name")}
-                required
-              />
+    <MdOutlineChair
+      className={`text-3xl -rotate-90 cursor-pointer ${seatColor}`}
+      onClick={isBooked ? null : onClick}
+    />
+  );
+};
+
+const TrainSeatLayout = () => {
+  const totalSeats = 41;
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [bookedSeats, setBookedSeats] = useState([]);
+  const { updateTrip, bookSeats } = useTrip();
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    const savedSelectedSeats = JSON.parse(localStorage.getItem("selectedSeats")) || [];
+    const savedBookedSeats = JSON.parse(localStorage.getItem("bookedSeats")) || [];
+    
+    setSelectedSeats(savedSelectedSeats);
+    setBookedSeats(savedBookedSeats);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
+    localStorage.setItem("bookedSeats", JSON.stringify(bookedSeats));
+
+    if (selectedSeats.length > 0) {
+      updateTripSeats();
+    }
+  }, [selectedSeats, bookedSeats]);
+
+  const handleSeatClick = (seatNumber) => {
+    if (bookedSeats.includes(seatNumber)) {
+      return;
+    }
+
+    if (selectedSeats.includes(seatNumber)) {
+      setSelectedSeats(selectedSeats.filter((seat) => seat !== seatNumber));
+    } else {
+      if (selectedSeats.length < 5) {
+        setSelectedSeats([...selectedSeats, seatNumber]);
+      } else {
+        alert("You can only select 5 seats");
+      }
+    }
+  };
+
+  const handleBookSeats = () => {
+    setBookedSeats([...bookedSeats, ...selectedSeats]);
+    setSelectedSeats([]);
+  };
+
+  const handleUnbookSeats = () => {
+    const newBookedSeats = bookedSeats.filter((seat) => !selectedSeats.includes(seat));
+    setBookedSeats(newBookedSeats);
+    setSelectedSeats([]);
+  };
+
+  const updateTripSeats = () => {
+    updateTrip("seats", selectedSeats);
+    updateTrip("totalPrice", selectedSeats.length * 15);
+  };
+
+  const renderSeats = () => {
+    let seats = [];
+    for (let i = 1; i <= totalSeats; i++) {
+      seats.push(
+        <Seat
+          key={i}
+          seatNumber={i}
+          isSelected={selectedSeats.includes(i)}
+          isBooked={bookedSeats.includes(i)}
+          onClick={() => handleSeatClick(i)}
+        />
+      );
+    }
+    return seats;
+  };
+
+  return (
+    <div className="space-y-5">
+      <h2 className="text-xl text-neutral-800 dark:text-neutral-100 font-medium">
+        {t("choose a seat")}
+      </h2>
+
+      <div className="w-full flex flex-col lg:flex-row justify-between">
+        <div className="flex-1 flex">
+          <div className="w-full flex-1 flex gap-x-4 items-stretch">
+            <div className="w-10 h-full border-r-2 border-dashed border-neutral-300 dark:border-neutral-800">
+              <GiSteeringWheel className="text-3xl mr-1 mt-6 text-[#1d5c87] -rotate-90" />
             </div>
 
-            <div>
-              <label htmlFor="email" className="block mb-2 font-semibold">
-                {t("email address")}
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="e.g. example@gmail.com"
-                className="w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 inline-block bg-neutral-200/60 dark:bg-neutral-900/60 px-3 h-12 border border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1d5c87] transition-all duration-200"
-                required
-              />
-              <small className="block mt-1 text-xs text-neutral-500 dark:text-neutral-600 font-normal">
-                {t("You will get your tickets via this email address.")}
-              </small>
-            </div>
-
-            <div>
-              <label htmlFor="phone" className="block mb-2 font-semibold">
-                {t("phone number")}
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                className="w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 inline-block bg-neutral-200/60 dark:bg-neutral-900/60 px-3 h-12 border border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1d5c87] transition-all duration-200"
-                placeholder="e.g. 0999077707"
-                required
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full px-8 h-12 bg-[#1d5c87] text-neutral-50 text-base font-normal rounded-md flex items-center justify-center gap-x-2 transform transition-all duration-300 hover:scale-105 hover:bg-[#1d5c87]"
-            >
-              {t("Buy Ticket")}
-              <FaArrowRight />
-            </button>
-          </form>
-        </div>
-
-        <div className="lg:col-span-2 lg:sticky lg:top-28 space-y-8 lg:mt-0 mt-10">
-          <div className="bg-neutral-200/50 dark:bg-neutral-900/70 rounded-md py-5 px-7">
-            <h2 className="text-xl text-center text-neutral-800 dark:text-neutral-100 font-medium border-b-2 border-neutral-200 dark:border-neutral-800/40 pb-3 mb-4">
-              {t("your booking status")}
-            </h2>
-
-            <div className="space-y-8 pb-3">
-              <div className="space-y-4">
-                <h6 className="text-base text-neutral-700 dark:text-neutral-200 font-medium">
-                  {t("your destination")}
-                </h6>
-
-                <div className="w-full flex items-center gap-x-3">
-                  <div className="w-fit text-base font-medium">
-                    {t("from")}:- <span className="ml-1.5">{trip.from}</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="w-full h-[1px] border border-dashed border-neutral-400 dark:border-neutral-700/80"></div>
-                  </div>
-                  <div className="w-fit text-base font-medium">
-                    {t("to")}:- <span className="ml-1.5">{trip.to}</span>
-                  </div>
+            <div className="flex flex-col items-center">
+              <div className="flex-1 space-y-4">
+                <div className="w-full grid grid-cols-10 gap-x-3">
+                  {renderSeats().slice(0, 10)}
                 </div>
-
-                <div className="w-full flex items-center gap-x-3">
-                  <div className="w-fit text-base font-medium">
-                    {t("date")}:- <span className="ml-1.5">{trip.date}</span>
-                  </div>
+                <div className="w-full grid grid-cols-10 gap-x-3">
+                  {renderSeats().slice(10, 20)}
                 </div>
-
-                <div className="w-full flex items-center gap-x-3">
-                  <div className="w-fit text-base font-medium">
-                    {t("time")}:- <span className="ml-1.5">{trip.time}</span>
-                  </div>
+                <div className="w-full grid grid-cols-10 gap-x-3">
+                  <div className="col-span-9"></div>
                 </div>
-
-                <div className="space-y-4">
-                  <h6 className="text-base text-neutral-700 dark:text-neutral-200 font-medium">
-                    {t("selected seats")}
-                  </h6>
-                  {trip.seats.length > 0 ? (
-                    <div className="flex flex-wrap gap-2">
-                      {trip.seats.map((seat, index) => (
-                        <div
-                          key={index}
-                          className="px-3 py-1 bg-[#1d5c87] text-white rounded-md"
-                        >
-                          {seat}
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p>{t("no_seats_selected")}</p>
-                  )}
+                <div className="w-full grid grid-cols-10 gap-x-3">
+                  {renderSeats().slice(20, 30)}
                 </div>
-
-                <div className="space-y-4">
-                  <div className="w-full flex items-center justify-between">
-                    <h6 className="text-base text-neutral-700 dark:text-neutral-200 font-medium">
-                      {t("total number of seats")}
-                    </h6>
-                    <h6 className="text-base text-neutral-700 dark:text-neutral-200 font-medium">
-                      {trip.seats.length || 0}
-                    </h6>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="w-full flex items-center justify-between">
-                    <h6 className="text-base text-neutral-700 dark:text-neutral-200 font-medium">
-                      {t("total amount")}
-                    </h6>
-                    <h6 className="text-base text-neutral-700 dark:text-neutral-200 font-medium">
-                      ${totalPrice}
-                    </h6>
-                  </div>
+                <div className="w-full grid grid-cols-10 gap-x-3">
+                  {renderSeats().slice(30, 40)}
                 </div>
               </div>
             </div>
           </div>
-
-          {emailSent && (
-            <p className="text-green-500 text-center">
-              {t("Email has been sent!")}
-            </p>
-          )}
         </div>
+
+        <div className="seat-info flex flex-col space-y-4 w-28 lg:ml-8 lg:mt-0 mt-6">
+          <div className="flex items-center gap-x-2">
+            <MdOutlineChair className="text-lg text-neutral-500 -rotate-90" />
+            <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
+              - {t("available")}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-x-2">
+            <MdOutlineChair className="text-lg text-red-500 -rotate-90" />
+            <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
+              - {t("booked")}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-x-2">
+            <MdOutlineChair className="text-lg text-[#1d5c87] -rotate-90" />
+            <p className="text-neutral-900 dark:text-neutral-200 text-sm font-normal">
+              - {t("selected")}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {selectedSeats.length > 0 && (
+        <div className="!mt-10">
+          <h3 className="text-lg font-bold">{t("selected seats:")}</h3>
+          <div className="flex flex-wrap">
+            {selectedSeats.map((seat) => (
+              <div
+                key={seat}
+                className="w-10 h-10 rounded-md m-1.5 text-lg font-medium bg-[#1d5c87] text-white flex items-center justify-center"
+              >
+                {seat}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {selectedSeats.length > 0 && (
+        <div className="!mt-5 flex items-center gap-x-1">
+          <h3 className="text-lg font-bold">{t("total price:")}</h3>
+          <p className="text-lg font-medium">{selectedSeats.length * 15}$</p>
+        </div>
+      )}
+
+      <div className="flex gap-x-2 mt-4">
+        <button
+          type="button"
+          onClick={handleBookSeats}
+          className="w-20 h-8 bg-[#1d5c87] text-neutral-50 text-base font-normal rounded-md flex items-center justify-center gap-x-2 transform transition-all duration-300 hover:scale-105 hover:bg-[#1d5c87]"
+        >
+          {t("book")}
+        </button>
+
+        <button
+          type="button"
+          onClick={handleUnbookSeats}
+          className="w-20 h-8 bg-red-500 text-neutral-50 text-base font-normal rounded-md flex items-center justify-center gap-x-2 transform transition-all duration-300 hover:scale-105 hover:bg-red-500"
+        >
+          {t("unbook")}
+        </button>
       </div>
     </div>
   );
 };
 
-export default Checkout;
+export default TrainSeatLayout;

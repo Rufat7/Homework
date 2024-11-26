@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from "../../assets/ADY6.png";
-import { FaPhone, FaUser, FaSignOutAlt, FaArrowCircleLeft } from 'react-icons/fa';
+import { FaPhone, FaUser, FaSignOutAlt, FaArrowCircleLeft, FaBars } from 'react-icons/fa';
 import Theme from '../theme/Theme';
 import './Navbar.css';
 import { useTranslation } from 'react-i18next';
@@ -10,18 +10,19 @@ import Register from '../register/Register';
 
 const Navbar = () => {
     const { t, i18n } = useTranslation();
-    const [registerOpen, setRegisterOpen] = useState(false); 
-    const [loginOpen, setLoginOpen] = useState(false); 
-    const [isAuthenticated, setIsAuthenticated] = useState(false); 
-    const navigate = useNavigate(); 
+    const [registerOpen, setRegisterOpen] = useState(false);
+    const [loginOpen, setLoginOpen] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const user = localStorage.getItem('user'); 
-        const hasRegistered = localStorage.getItem('hasRegistered'); 
+        const user = localStorage.getItem('user');
+        const hasRegistered = localStorage.getItem('hasRegistered');
         if (user) {
             setIsAuthenticated(true);
         } else if (!hasRegistered) {
-            setRegisterOpen(true); 
+            setRegisterOpen(true);
         }
     }, []);
 
@@ -48,18 +49,18 @@ const Navbar = () => {
     };
 
     const handleLoginSuccess = () => {
-        setIsAuthenticated(true); 
-        localStorage.setItem('user', 'true'); 
-        navigate('/dashboard'); 
+        setIsAuthenticated(true);
+        localStorage.setItem('user', 'true');
+        navigate('/dashboard');
         closeLogin();
     };
 
     const handleLogout = () => {
-        setIsAuthenticated(false); 
-        localStorage.removeItem('user'); 
-        setRegisterOpen(true); 
+        setIsAuthenticated(false);
+        localStorage.removeItem('user');
+        setRegisterOpen(true);
         setLoginOpen(false);
-        navigate('/'); 
+        navigate('/');
     };
 
     const goToDashboard = () => {
@@ -72,7 +73,11 @@ const Navbar = () => {
                 <img src={Logo} alt="logo" />
             </Link>
 
-            <div className={`navbar-links`}>
+            <div className="navbar-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+                <FaBars className="icon" />
+            </div>
+
+            <div className={`navbar-links ${menuOpen ? 'open' : ''}`}>
                 <ul>
                     <li>
                         <Link to="/" onClick={() => setLoginOpen(false)} className="navbar-link">
@@ -109,7 +114,7 @@ const Navbar = () => {
                             <p className="phone-number">+994 99 907 77 07</p>
                         </div>
                     </div>
-                    <Theme />
+                    <Theme/>
                 </div>
 
                 <div className="navbar-actions">

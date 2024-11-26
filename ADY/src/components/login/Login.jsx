@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 
 export default function Login({ onClose, openRegister, onLoginSuccess }) {
@@ -12,7 +14,6 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
     password: "",
   });
 
-  const [loginError, setLoginError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e) => {
@@ -22,8 +23,14 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.email) newErrors.email = "Please enter your email";
-    if (!formData.password) newErrors.password = "Please enter your password";
+    if (!formData.email) {
+      newErrors.email = "Please enter your email";
+      toast.error("Please enter your email");  // Toast для ошибки
+    }
+    if (!formData.password) {
+      newErrors.password = "Please enter your password";
+      toast.error("Please enter your password");  // Toast для ошибки
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -31,7 +38,6 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoginError("");
     if (validateForm()) {
       setIsLoading(true);
       try {
@@ -46,19 +52,18 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
         setIsLoading(false);
 
         if (response.ok) {
-          const userData = await response.json(); 
-          
-          
+          const userData = await response.json();
           localStorage.setItem('userData', JSON.stringify(userData));
 
+          toast.success("Login successful!");  
           onLoginSuccess(); 
         } else {
           const errorData = await response.json();
-          setLoginError(errorData.message || "Login error. Please try again later.");
+          toast.error(errorData.message || "Login error. Please try again later.");  
         }
       } catch (error) {
         setIsLoading(false);
-        setLoginError("Connection error");
+        toast.error("Invalid Account");  
       }
     }
   };
@@ -75,7 +80,7 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
             placeholder="Email"
             onChange={handleInputChange}
           />
-          {errors.email && <span className="error">{errors.email}</span>}
+          
 
           <input
             type="password"
@@ -84,11 +89,9 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
             placeholder="Password"
             onChange={handleInputChange}
           />
-          {errors.password && <span className="error">{errors.password}</span>}
+         
 
-          {loginError && <span className="error">{loginError}</span>}
-
-          <button className="login-button" onClick={handleSubmit} disabled={isLoading}>
+          <button className="to-register-button" onClick={handleSubmit} disabled={isLoading}>
             {isLoading ? "Loading..." : "Login"}
           </button>
 
@@ -99,10 +102,11 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
               openRegister();
             }}
           >
-            Don't have an account? Register
+            Don't have account? Register
           </button>
         </div>
       </div>
+      <ToastContainer position="top-right" autoClose={5000} hideProgressBar closeOnClick />
     </div>
   );
 }
