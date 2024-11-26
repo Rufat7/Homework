@@ -3,6 +3,7 @@ import { GiSteeringWheel } from "react-icons/gi";
 import { MdOutlineChair } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { useTrip } from "../../context/TripContext";
+import { Link } from 'react-router-dom';  
 
 const Seat = ({ seatNumber, isSelected, isBooked, onClick }) => {
   let seatColor = "";
@@ -26,6 +27,7 @@ const TrainSeatLayout = () => {
   const totalSeats = 41;
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [bookedSeats, setBookedSeats] = useState([]);
+  const [isBooked, setIsBooked] = useState(false); 
   const { updateTrip } = useTrip();
   const { t } = useTranslation();
 
@@ -68,11 +70,13 @@ const TrainSeatLayout = () => {
       return updatedBookedSeats;
     });
     setSelectedSeats([]);
+    setIsBooked(true);  
   };
 
   const handleUnbookSeats = () => {
     setBookedSeats([]);
     setSelectedSeats([]);
+    setIsBooked(false); 
     localStorage.setItem("selectedSeats", JSON.stringify([]));
     localStorage.setItem("bookedSeats", JSON.stringify([]));
   };
@@ -176,7 +180,7 @@ const TrainSeatLayout = () => {
       {selectedSeats.length > 0 && (
         <div className="!mt-5 flex items-center gap-x-1">
           <h3 className="text-lg font-bold">{t("total price:")}</h3>
-          <p className="text-lg font-medium">{selectedSeats.length * 15}$</p>
+          <p className="text-lg font-medium">{selectedSeats.length * 15}₼</p>
         </div>
       )}
 
@@ -196,6 +200,17 @@ const TrainSeatLayout = () => {
         >
           {t("unbook all")}
         </button>
+      </div>
+
+    
+      <div className="mt-6">
+        <Link
+          to="/checkout"
+          className={`w-full bg-[#1d5c87] text-white font-medium text-base px-6 py-2 rounded-md text-center ${!isBooked ? 'opacity-50 cursor-not-allowed' : ''}`}
+          style={{ pointerEvents: isBooked ? 'auto' : 'none' }}
+        >
+          {t("buy")}
+        </Link>
       </div>
     </div>
   );
