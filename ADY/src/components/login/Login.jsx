@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
+import { useTranslation } from 'react-i18next';
 
 export default function Login({ onClose, openRegister, onLoginSuccess }) {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -25,11 +28,11 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
     const newErrors = {};
     if (!formData.email) {
       newErrors.email = "Please enter your email";
-      toast.error("Please enter your email");  // Toast для ошибки
+      toast.error("Please enter your email");
     }
     if (!formData.password) {
       newErrors.password = "Please enter your password";
-      toast.error("Please enter your password");  // Toast для ошибки
+      toast.error("Please enter your password");
     }
 
     setErrors(newErrors);
@@ -55,15 +58,19 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
           const userData = await response.json();
           localStorage.setItem('userData', JSON.stringify(userData));
 
-          toast.success("Login successful!");  
-          onLoginSuccess(); 
+          toast.success("Login successful!");
+
+          
+          const role = userData.email === "ady-admin@gmail.com" ? "admin" : "user";
+          onLoginSuccess(role);  
+
         } else {
           const errorData = await response.json();
-          toast.error(errorData.message || "Login error. Please try again later.");  
+          toast.error(errorData.message || "Login error. Please try again later.");
         }
       } catch (error) {
         setIsLoading(false);
-        toast.error("Invalid Account");  
+        toast.error("Invalid Account");
       }
     }
   };
@@ -72,7 +79,7 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
     <div className="modal-overlay">
       <div className="modal-window">
         <div className="modal-window-container">
-          <h1>Login</h1>
+          <h1 className="head2">{t("login")}</h1>
           <input
             type="email"
             name="email"
@@ -80,19 +87,17 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
             placeholder="Email"
             onChange={handleInputChange}
           />
-          
 
           <input
             type="password"
             name="password"
             value={formData.password}
-            placeholder="Password"
+            placeholder={t("password")}
             onChange={handleInputChange}
           />
-         
 
           <button className="to-register-button" onClick={handleSubmit} disabled={isLoading}>
-            {isLoading ? "Loading..." : "Login"}
+            {t("log")}
           </button>
 
           <button
@@ -102,7 +107,7 @@ export default function Login({ onClose, openRegister, onLoginSuccess }) {
               openRegister();
             }}
           >
-            Don't have account? Register
+            {t("don't have")}
           </button>
         </div>
       </div>
