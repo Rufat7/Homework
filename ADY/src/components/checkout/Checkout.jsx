@@ -8,9 +8,9 @@ const Checkout = () => {
   const { trip, totalPrice, updateTrip } = useTrip();
   const { t } = useTranslation();
   const [emailSent, setEmailSent] = useState(false);
-  const [seatsBooked, setSeatsBooked] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [emailSentMessage, setEmailSentMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const savedTrip = JSON.parse(localStorage.getItem("trip"));
@@ -29,26 +29,48 @@ const Checkout = () => {
     }
 
     localStorage.removeItem("bookedSeats");
-
   }, [updateTrip]);
 
-  const sendEmail = async (fullname, email, phone) => {
+  const sendEmailAndSaveTicket = async (fullname, email, phone) => {
     try {
-      await axios.post("http://localhost:5000/send-email", {
+    
+      const ticketResponse = await axios.post(
+        "https://localhost:7261/api/Tickets/Create",
+        {
+          fullName: fullname,
+          email: email,
+          from: trip.from,
+          to: trip.to,
+          date: trip.date,
+          time: trip.time,
+          seats: trip.seats.join(", "),
+          totalPrice: totalPrice,
+          userId: 1,
+        }
+      );
+
+      console.log("Ticket saved:", ticketResponse.data);
+
+      
+      const emailResponse = await axios.post("http://localhost:5000/send-email", {
         fullname,
         email,
         phone,
         trip,
         totalPrice,
       });
+
+      console.log("Email sent:", emailResponse.data);
+
+    
       setEmailSent(true);
-      setEmailSentMessage(t("Email has been sent successfully!"));
+      setEmailSentMessage(t("Email sent and ticket saved successfully!"));
       setTimeout(() => {
         setEmailSentMessage("");
       }, 3000);
     } catch (error) {
-      console.error("Error sending email:", error);
-      alert(t("Failed to send email"));
+      console.error("Error saving ticket or sending email:", error);
+      setErrorMessage(t("Failed to save ticket or send email"));
     }
   };
 
@@ -58,14 +80,13 @@ const Checkout = () => {
     const email = e.target.email.value;
     const phone = e.target.phone.value;
 
-    sendEmail(fullname, email, phone);
-  };
-
-  const handleBookSeats = () => {
     updateTrip("bookedSeats", trip.seats);
     localStorage.setItem("bookedSeats", JSON.stringify(trip.seats));
-    setSeatsBooked(true);
     setSuccessMessage(t("Seats have been booked!"));
+
+  
+    sendEmailAndSaveTicket(fullname, email, phone);
+
     setTimeout(() => {
       setSuccessMessage("");
     }, 3000);
@@ -132,10 +153,9 @@ const Checkout = () => {
 
             <button
               type="submit"
-              disabled={!seatsBooked}
               className="w-full px-8 h-12 bg-[#1d5c87] text-neutral-50 text-base font-normal rounded-md flex items-center justify-center gap-x-2 transform transition-all duration-300 hover:scale-105 hover:bg-[#1d5c87]"
             >
-              {t("Buy Ticket")}
+              {t("buy ticked")}
               <FaArrowRight />
             </button>
           </form>
@@ -181,47 +201,44 @@ const Checkout = () => {
                   <h6 className="text-base text-neutral-700 dark:text-neutral-200 font-medium">
                     {t("selected seats")}
                   </h6>
-                  {trip.seats.length > 0 ? (
-                    <div className="flex gap-2 flex-wrap">
+                  {trip.seats?.length > 0 ? (
+                    <div className="flex items-center gap-2 flex-wrap">
                       {trip.seats.map((seat, index) => (
                         <span
                           key={index}
-                          className="px-3 py-1 rounded-md text-sm bg-[#1d5c87] text-neutral-50"
+                          className="bg-neutral-300 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-300 px-3 py-1.5 rounded-full text-sm font-medium"
                         >
                           {seat}
                         </span>
                       ))}
                     </div>
                   ) : (
-                    <div>{t("No seats selected")}</div>
+                    <div className="text-neutral-400">
+                      {t("No seats selected.")}
+                    </div>
                   )}
                 </div>
               </div>
-            </div>
-
-            <div className="text-xl font-semibold text-center py-4">
-              <p>{t("Total Price")}: {totalPrice} AZN</p>
-            </div>
-
-            <div className="w-full mt-5">
-              <button
-                onClick={handleBookSeats}
-                className="w-full bg-[#1d5c87] text-neutral-50 py-2 rounded-md text-base font-semibold transform transition-all duration-200 hover:scale-105 hover:bg-[#1d5c87]"
-              >
-                {t("Book Seats")}
-              </button>
+              <div className="w-full flex items-center gap-x-3">
+                <h6 className="text-base text-neutral-700 dark:text-neutral-200 font-medium">
+                  {t("Total Price:")}
+                </h6>
+                <div className="text-base font-medium text-neutral-900 dark:text-neutral-100">
+                  {totalPrice} AZN
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      {successMessage && (
-        <div className="absolute top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-md">
-          {successMessage}
+      {emailSentMessage && (
+        <div className="fixed bottom-10 left-10 bg-green-600 text-white py-2 px-4 rounded-md">
+          {emailSentMessage}
         </div>
       )}
-      {emailSentMessage && (
-        <div className="absolute top-20 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-2 rounded-md">
-          {emailSentMessage}
+      {errorMessage && (
+        <div className="fixed bottom-10 left-10 bg-red-600 text-white py-2 px-4 rounded-md">
+          {errorMessage}
         </div>
       )}
     </div>
