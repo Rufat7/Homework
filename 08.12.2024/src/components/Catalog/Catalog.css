@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    justify-content: flex-end; 
+    padding: 20px;
+    border: 1px solid #ddd;
+    height: 100vh;
+  }
+  
+  .wrapper {
+    position: relative; 
+    top: 0;
+    right: 0;
+    margin: 40px;
+    
+  }
+  
+  .catalog-container {
+    height: auto;
+  }
+  
+  .filter-list-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1px;
+    padding: 10px;
+    margin-left: auto;
+  }
+  
+  .all-shoes-p {
+    padding-right: 0; 
+    padding-left: 5%; 
+  }
+  

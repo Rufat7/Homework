@@ -1,0 +1,5 @@
+.arrivals-image img {
+  width: 100% !important; 
+  height: 400px !important; 
+  object-fit: cover;
+}
