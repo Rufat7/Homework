@@ -1,6 +1,5 @@
 "use client"
-
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import Image from "next/image"
 import { Sofa, ChefHat, UtensilsCrossed, Building2, Bed, DoorOpen } from "lucide-react"
 import styles from "@/styles/furniture-filter.module.css"
@@ -13,13 +12,15 @@ import hallway from "@/images/hallway.jpg"
 
 type FilterType = "room" | "category" | "style"
 type RoomType = "living" | "kitchen" | "dining" | "office" | "bedroom" | "hallway"
+type CategoryType = "chairs" | "tables" | "sofas" | "storage" | "beds" | "lighting"
+type StyleType = "modern" | "scandinavian" | "industrial" | "classic" | "minimalist" | "rustic"
 
 interface FilterItem {
   id: string
   name: string
   icon?: JSX.Element
+  image?: typeof office
 }
-
 
 const roomImages: Record<RoomType, typeof office> = {
   living: livingRoom,
@@ -30,39 +31,57 @@ const roomImages: Record<RoomType, typeof office> = {
   hallway: hallway,
 }
 
+const categoryImages: Record<CategoryType, typeof office> = {
+  chairs: livingRoom, 
+  tables: diningRoom,
+  sofas: livingRoom,
+  storage: office,
+  beds: bedRoom,
+  lighting: kitchen,
+}
+
+const styleImages: Record<StyleType, typeof office> = {
+  modern: livingRoom,
+  scandinavian: bedRoom,
+  industrial: office,
+  classic: diningRoom,
+  minimalist: hallway,
+  rustic: kitchen,
+}
+
 export default function FurnitureFilter() {
   const [activeFilter, setActiveFilter] = useState<FilterType>("room")
   const [selectedRoom, setSelectedRoom] = useState<RoomType>("living")
+  const [selectedCategory, setSelectedCategory] = useState<CategoryType>("sofas")
+  const [selectedStyle, setSelectedStyle] = useState<StyleType>("modern")
 
-  
   const roomData: FilterItem[] = [
-    { id: "living", name: "Living Room", icon: <Sofa className={styles.icon} /> },
-    { id: "kitchen", name: "Kitchen", icon: <ChefHat className={styles.icon} /> },
-    { id: "dining", name: "Dining Room", icon: <UtensilsCrossed className={styles.icon} /> },
-    { id: "office", name: "Office", icon: <Building2 className={styles.icon} /> },
-    { id: "bedroom", name: "Bed Room", icon: <Bed className={styles.icon} /> },
-    { id: "hallway", name: "Hallway", icon: <DoorOpen className={styles.icon} /> },
+    { id: "living", name: "Living Room", icon: <Sofa className={styles.icon} />, image: livingRoom },
+    { id: "kitchen", name: "Kitchen", icon: <ChefHat className={styles.icon} />, image: kitchen },
+    { id: "dining", name: "Dining Room", icon: <UtensilsCrossed className={styles.icon} />, image: diningRoom },
+    { id: "office", name: "Office", icon: <Building2 className={styles.icon} />, image: office },
+    { id: "bedroom", name: "Bed Room", icon: <Bed className={styles.icon} />, image: bedRoom },
+    { id: "hallway", name: "Hallway", icon: <DoorOpen className={styles.icon} />, image: hallway },
   ]
 
   const categoryData: FilterItem[] = [
-    { id: "chairs", name: "Chairs" },
-    { id: "tables", name: "Tables" },
-    { id: "sofas", name: "Sofas" },
-    { id: "storage", name: "Storage" },
-    { id: "beds", name: "Beds" },
-    { id: "lighting", name: "Lighting" },
+    { id: "chairs", name: "Chairs", image: categoryImages.chairs },
+    { id: "tables", name: "Tables", image: categoryImages.tables },
+    { id: "sofas", name: "Sofas", image: categoryImages.sofas },
+    { id: "storage", name: "Storage", image: categoryImages.storage },
+    { id: "beds", name: "Beds", image: categoryImages.beds },
+    { id: "lighting", name: "Lighting", image: categoryImages.lighting },
   ]
 
   const styleData: FilterItem[] = [
-    { id: "modern", name: "Modern" },
-    { id: "scandinavian", name: "Scandinavian" },
-    { id: "industrial", name: "Industrial" },
-    { id: "classic", name: "Classic" },
-    { id: "minimalist", name: "Minimalist" },
-    { id: "rustic", name: "Rustic" },
+    { id: "modern", name: "Modern", image: styleImages.modern },
+    { id: "scandinavian", name: "Scandinavian", image: styleImages.scandinavian },
+    { id: "industrial", name: "Industrial", image: styleImages.industrial },
+    { id: "classic", name: "Classic", image: styleImages.classic },
+    { id: "minimalist", name: "Minimalist", image: styleImages.minimalist },
+    { id: "rustic", name: "Rustic", image: styleImages.rustic },
   ]
 
-  
   const getFilterData = (): FilterItem[] => {
     switch (activeFilter) {
       case "room":
@@ -76,14 +95,43 @@ export default function FurnitureFilter() {
     }
   }
 
-  const getRoomImage = () => {
-    return roomImages[selectedRoom] || livingRoom 
+  const getCurrentImage = () => {
+    switch (activeFilter) {
+      case "room":
+        return roomImages[selectedRoom] || livingRoom
+      case "category":
+        return categoryImages[selectedCategory as CategoryType] || livingRoom
+      case "style":
+        return styleImages[selectedStyle as StyleType] || livingRoom
+      default:
+        return livingRoom
+    }
   }
 
-  
+  const getSelectedId = (): string => {
+    switch (activeFilter) {
+      case "room":
+        return selectedRoom
+      case "category":
+        return selectedCategory
+      case "style":
+        return selectedStyle
+      default:
+        return selectedRoom
+    }
+  }
+
   const handleItemClick = (id: string) => {
-    if (activeFilter === "room") {
-      setSelectedRoom(id as RoomType)
+    switch (activeFilter) {
+      case "room":
+        setSelectedRoom(id as RoomType)
+        break
+      case "category":
+        setSelectedCategory(id as CategoryType)
+        break
+      case "style":
+        setSelectedStyle(id as StyleType)
+        break
     }
   }
 
@@ -91,7 +139,7 @@ export default function FurnitureFilter() {
     <div className={styles.container}>
       <h1 className={styles.title}>All Furniture</h1>
 
-            <div className={styles.tabs}>
+      <div className={styles.tabs}>
         <button
           className={`${styles.tab} ${activeFilter === "room" ? styles.activeTab : ""}`}
           onClick={() => setActiveFilter("room")}
@@ -112,27 +160,27 @@ export default function FurnitureFilter() {
         </button>
       </div>
 
-     
       <div className={styles.content}>
-      
         <div className={styles.imageContainer}>
           <Image
-            src={getRoomImage()}
-            alt={`${selectedRoom} room`}
+            src={getCurrentImage() || "/placeholder.svg"}
+            alt={`${getSelectedId()} ${activeFilter}`}
             fill
             className={styles.roomImage}
-            priority={selectedRoom === "living"} 
+            priority={activeFilter === "room" && selectedRoom === "living"}
           />
+          <div className={styles.imageOverlay}>
+            <h2 className={styles.imageTitle}>
+              {getFilterData().find((item) => item.id === getSelectedId())?.name || "Furniture"}
+            </h2>
+          </div>
         </div>
 
-   
         <div className={styles.grid}>
           {getFilterData().map((item) => (
             <button
               key={item.id}
-              className={`${styles.gridItem} ${
-                activeFilter === "room" && selectedRoom === item.id ? styles.activeGridItem : ""
-              }`}
+              className={`${styles.gridItem} ${item.id === getSelectedId() ? styles.activeGridItem : ""}`}
               onClick={() => handleItemClick(item.id)}
             >
               <div className={styles.iconContainer}>
