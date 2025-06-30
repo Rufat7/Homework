@@ -2,8 +2,11 @@ import { useFonts } from "expo-font";
 import { router, Slot, SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { Text, View } from "react-native";
+import "../global.css";
 
 SplashScreen.preventAutoHideAsync();
+
+
 const RootLayout = () => {
   const [loaded, error] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
@@ -19,8 +22,6 @@ const RootLayout = () => {
   useEffect(() => {
     if (loaded || error) {
       SplashScreen.hideAsync();
-
-      router.navigate("/(auth)");
     }
   }, [loaded, error]);
 

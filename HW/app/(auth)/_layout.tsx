@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 const AuthLayout = () => {
   return (
@@ -8,18 +8,8 @@ const AuthLayout = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen
-        options={{
-          title: "Login",
-        }}
-        name="login"
-      />
-      <Stack.Screen
-        options={{
-          title: "Register",
-        }}
-        name="register"
-      />
+      <Stack.Screen name="(tabview)" />
+  
       <Stack.Screen
         options={{
           title: "Forgot Password?",

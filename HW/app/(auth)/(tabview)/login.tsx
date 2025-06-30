@@ -1,67 +1,31 @@
 import {
-  Pressable,
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   useWindowDimensions,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import  { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { theme } from "../../constants/theme";
-import { Image } from "expo-image";
-import { usePathname } from "expo-router";
+import { theme } from "../../../constants/theme";
+
+import { router} from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 
 const Login = () => {
   const { width } = useWindowDimensions();
-  const pathname = usePathname();
   const styles = getStyles(width);
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleLogin = () => {
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("Remember Me:", rememberMe);
-  };
-
-  return (
+ return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.content}>
-        <View style={styles.topView}>
-          <Image
-            contentFit="contain"
-            source={require("../../assets/Logo.svg")}
-            style={{ width: 35, height: 55 }}
-          />
-
-          <View style={styles.welcomeWrapper}>
-            <Text style={styles.welcomeText}>Welcome back</Text>
-            <Text style={styles.welcomeSubText}>
-              Create an account or log in to explore the app
-            </Text>
-          </View>
-
-          <View style={styles.tabRow}>
-            <Pressable style={styles.tabButton}>
-              <Text style={styles.tabText}>Sign Up</Text>
-            </Pressable>
-            <Pressable style={[styles.tabButton, { backgroundColor: theme.colors.white }]}>
-              <Text style={styles.tabText}>Sign In</Text>
-            </Pressable>
-          </View>
-
+        
           <View style={styles.inputWrapper}>
             <Text style={styles.label}>Email</Text>
             <TextInput
               style={styles.input}
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
-              autoCapitalize="none"
             />
           </View>
 
@@ -69,48 +33,48 @@ const Login = () => {
             <Text style={styles.label}>Password</Text>
             <TextInput
               style={styles.input}
-              value={password}
-              onChangeText={setPassword}
               secureTextEntry
             />
           </View>
 
           <View style={styles.rememberRow}>
             <View style={styles.checkboxTextWrapper}>
-              <Pressable
+              <TouchableOpacity
                 style={[styles.checkboxWrapper, rememberMe && styles.checkboxChecked]}
                 onPress={() => setRememberMe(!rememberMe)}
               >
                 {rememberMe && (
                   <FontAwesome name="check" size={16} color={theme.colors.white} />
                 )}
-              </Pressable>
+              </TouchableOpacity>
               <Text style={styles.rememberText}>Remember me</Text>
             </View>
-            <Pressable>
+            <TouchableOpacity>
               <Text style={styles.forgotText}>Forgot password?</Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
 
-          <Pressable style={styles.loginButton} onPress={handleLogin}>
+          <TouchableOpacity style={styles.loginButton} onPress={() => {
+            router.push("/(auth)/otp");
+          }}>
             <Text style={styles.loginButtonText}>Log In</Text>
-          </Pressable>
+          </TouchableOpacity>
 
-          <Text style={styles.dividerText}>or login with</Text>
+          <Text style={styles.dividerText}>-----------------  or login with  -----------------</Text>
 
           <View style={styles.socialRow}>
-            <Pressable style={[styles.socialButtonRect, styles.socialButtonShadow]}>
-              <FontAwesome name="google" size={24} color="#DB4437" />
-            </Pressable>
-            <Pressable style={[styles.socialButtonRect, styles.socialButtonShadow]}>
+            <TouchableOpacity style={[styles.socialButtonRect, styles.socialButtonShadow]}>
+              <FontAwesome name="google" size={24} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.socialButtonRect, styles.socialButtonShadow]}>
               <FontAwesome name="apple" size={24} color="black" />
-            </Pressable>
-            <Pressable style={[styles.socialButtonRect, styles.socialButtonShadow]}>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.socialButtonRect, styles.socialButtonShadow]}>
               <FontAwesome name="twitter" size={24} color="#1DA1F2" />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
-      </View>
+      
     </SafeAreaView>
   );
 };
@@ -121,40 +85,20 @@ const getStyles = (width: number) =>
   StyleSheet.create({
     wrapper: {
       flex: 1,
-      paddingTop: 14,
+      paddingTop: -70,
       alignItems: "center",
-      backgroundColor: "#FAFAFA",
+      backgroundColor: "white",
     },
     content: {
       flex: 1,
       width: width - 32,
-      gap: 24,
+      gap: 22,
     },
-    topView: {
-      alignItems: "center",
-      gap: 24,
-    },
-    welcomeWrapper: {
-      justifyContent: "center",
-      alignItems: "center",
-      gap: 12,
-    },
-    welcomeText: {
-      fontSize: 32,
-      color: "#19213D",
-      fontFamily: theme.fonts.bold,
-    },
-    welcomeSubText: {
-      fontFamily: theme.fonts.regular,
-      color: theme.colors.grey,
-      paddingHorizontal: 63,
-      fontSize: 14,
-      textAlign: "center",
-    },
+   
     tabRow: {
       flexDirection: "row",
       padding: 2,
-      gap: 12,
+      gap: 10,
       width: "100%",
       backgroundColor: "#F8F9FA",
       borderRadius: 12,
@@ -219,7 +163,7 @@ const getStyles = (width: number) =>
       fontFamily: theme.fonts.regular,
       fontSize: 14,
       color: theme.colors.secondary,
-      marginLeft: 2,
+      marginLeft: 6,
     },
     forgotText: {
       fontFamily: theme.fonts.medium,
@@ -232,7 +176,7 @@ const getStyles = (width: number) =>
       paddingVertical: 16,
       borderRadius: 12,
       alignItems: "center",
-      marginTop: 16,
+      marginTop: 12,
     },
     loginButtonText: {
       color: theme.colors.white,
@@ -241,15 +185,15 @@ const getStyles = (width: number) =>
     },
     dividerText: {
       fontFamily: theme.fonts.regular,
+      textAlign: "center",
       fontSize: 14,
       color: theme.colors.grey,
-      marginTop: 24,
     },
     socialRow: {
       flexDirection: "row",
       justifyContent: "space-between",
       gap: 12,
-      marginTop: 8,
+ 
       width: "100%",
     },
     socialButtonRect: {
