@@ -50,7 +50,9 @@ const Login = () => {
               <Text style={styles.rememberText}>Remember me</Text>
             </View>
             <TouchableOpacity>
-              <Text style={styles.forgotText}>Forgot password?</Text>
+              <Text style={styles.forgotText} onPress={() => {
+            router.push("/(auth)/forgot-password");
+          }} >Forgot password?</Text>
             </TouchableOpacity>
           </View>
 
