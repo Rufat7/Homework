@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { theme } from "../../constants/theme";
+import { theme } from "../../../constants/theme";
 import { router } from "expo-router";
 
 const Home = () => {
@@ -129,49 +129,6 @@ const Home = () => {
         </View>
       </View>
 
-      <View style={styles.bottomNav}>
-        <TouchableOpacity
-          style={styles.navItem}
-          onPress={() => router.push("/(auth)/home")}
-        >
-          <Ionicons name="home" size={26} color={theme.colors.primary} />
-          <Text style={styles.navLabelActive}>Home</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.navItem}
-          onPress={() => router.push("/(auth)/assets")}
-        >
-          <MaterialIcons name="analytics" size={26} color="gray" />
-          <Text style={styles.navLabel}>Assets</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.navItem, styles.centerSwap]}
-          onPress={() => router.push("/(auth)/swap")}
-        >
-          <View style={styles.centerSwapIcon}>
-            <Ionicons name="swap-vertical-outline" size={26} color="gray" />
-          </View>
-          <Text style={styles.navLabelCenter}>Swap</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.navItem}
-          onPress={() => router.push("/(auth)/history")}
-        >
-          <Ionicons name="time-outline" size={26} color="gray" />
-          <Text style={styles.navLabel}>History</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.navItem}
-          onPress={() => router.push("/(auth)/settings")}
-        >
-          <Ionicons name="settings-outline" size={26} color="gray" />
-          <Text style={styles.navLabel}>Settings</Text>
-        </TouchableOpacity>
-      </View>
     </SafeAreaView>
   );
 };
