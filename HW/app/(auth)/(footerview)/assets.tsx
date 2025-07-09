@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FontAwesome } from "@expo/vector-icons";
 
 type NewsItem = {
   id: number;
@@ -50,7 +49,7 @@ export default function App() {
   ];
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-[#FAFAFA]">
       {selectedNews ? (
         <ScrollView className="p-5">
           <View className="flex-row justify-between items-center mb-6">
@@ -104,30 +103,52 @@ export default function App() {
           </View>
 
           <View className="flex-row justify-between mb-10">
-            <View className="w-[48%] h-[220px] p-6 bg-gray-100 rounded-2xl justify-between">
+            <View
+              className="w-[48%] h-[220px] p-6 rounded-2xl justify-between"
+              style={{ backgroundColor: "#F4F6F8" }}
+            >
               <View className="flex-row justify-between items-center">
                 <Text className="text-gray-800 text-xl font-bold">DASH</Text>
                 <Text className="text-green-500 font-bold text-lg">↑ 1.42%</Text>
               </View>
               <View className="flex-1 justify-center">
-                <Text className="text-3xl font-extrabold text-center mt-2">$22.29</Text>
+                <Text className="text-3xl font-extrabold text-left mt-2">
+                  $22.29
+                </Text>
               </View>
               <View className="flex-row items-center justify-center">
-                <FontAwesome name="circle" size={30} color="#007AFF" />
-                <Text className="ml-3 text-gray-700 text-3xl font-bold">Dash</Text>
+                <Image
+                  source={{
+                    uri: "https://cdn-icons-png.flaticon.com/512/825/825534.png",
+                  }}
+                  style={{ width: 30, height: 30 }}
+                  resizeMode="contain"
+                />
+                <Text className="ml-3 text-gray-700 text-2xl font-bold">Dash</Text>
               </View>
             </View>
 
-            <View className="w-[48%] h-[220px] p-6 bg-gray-100 rounded-2xl justify-between">
+            <View
+              className="w-[48%] h-[220px] p-6 rounded-2xl justify-between"
+              style={{ backgroundColor: "#F6F6F6" }} 
+            >
               <View className="flex-row justify-between items-center">
                 <Text className="text-gray-800 text-xl font-bold">BTC</Text>
                 <Text className="text-green-500 font-bold text-lg">↑ 2.79%</Text>
               </View>
               <View className="flex-1 justify-center">
-                <Text className="text-3xl font-extrabold text-center mt-2">$88,582.07</Text>
+                <Text className="text-3xl font-extrabold text-left mt-2">
+                  $88,582.07
+                </Text>
               </View>
               <View className="flex-row items-center justify-center">
-                <FontAwesome name="bitcoin" size={30} color="#f7931a" />
+                <Image
+                  source={{
+                    uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/2048px-Bitcoin.svg.png",
+                  }}
+                  style={{ width: 30, height: 30 }}
+                  resizeMode="contain"
+                />
                 <Text className="ml-3 text-gray-700 text-2xl font-bold">Bitcoin</Text>
               </View>
             </View>

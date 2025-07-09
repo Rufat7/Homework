@@ -4,6 +4,7 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  Keyboard,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -29,6 +30,10 @@ const OTP = () => {
     } else if (text === "" && index > 0) {
       inputs.current[index - 1]?.focus();
     }
+
+    if (otpValue.every((digit) => digit !== "")) {
+      Keyboard.dismiss();
+    }
   };
 
   const handleKeyPress = (e: any, index: number) => {
@@ -40,6 +45,7 @@ const OTP = () => {
   const handleFocus = (index: number) => {
     setFocusedIndex(index);
   };
+
   const isOtpComplete = otp.every((digit) => digit !== "");
 
   return (
@@ -83,6 +89,7 @@ const OTP = () => {
             ))}
           </View>
         </View>
+
         <View style={styles.buttonContainer}>
           <TouchableOpacity>
             <Text style={styles.resendText}>Didn't get a code?</Text>
@@ -99,10 +106,7 @@ const OTP = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[
-                styles.button,
-                styles.sendButton,
-              ]}
+              style={[styles.button, styles.sendButton]}
               disabled={!isOtpComplete}
               onPress={() => router.push("/home")}
             >

@@ -5,7 +5,6 @@ import { router } from 'expo-router';
 
 const SettingsScreen = () => {
   const handleLogout = () => {
-
     router.push('/(auth)/(tabview)/login');
   };
 
@@ -48,6 +47,7 @@ type SettingItemProps = {
 const SettingItem: React.FC<SettingItemProps> = ({ icon, label }) => (
   <TouchableOpacity style={styles.item}>
     <View style={styles.itemLeft}>
+      <Ionicons name={icon} size={24} color="#555" />
       <Text style={styles.itemText}>{label}</Text>
     </View>
     <Ionicons name="chevron-forward" size={24} color="#999" />
