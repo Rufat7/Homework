@@ -4,10 +4,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { router, usePathname } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { theme } from "../constants/theme";
 
-const AuthFooter = () => {
+export default function Footer() {
   const pathname = usePathname();
+  console.log("Current pathname:", pathname);
 
   return (
     <SafeAreaView edges={["bottom"]}>
@@ -16,56 +16,84 @@ const AuthFooter = () => {
           style={styles.navItem}
           onPress={() => router.push("/(auth)/(footerview)/home")}
         >
-          <Ionicons name="home" size={26} color={theme.colors.primary} />
-          <Text style={styles.navLabelActive}>Home</Text>
+          <Ionicons
+            name="home"
+            size={26}
+            color={pathname.includes("/home") ? '#003CFF' : 'gray'}
+          />
+          <Text style={pathname.includes("/home") ? styles.navLabelActive : styles.navLabel}>
+            Home
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.navItem}
           onPress={() => router.push("/(auth)/(footerview)/assets")}
         >
-          <MaterialIcons name="analytics" size={26} color="gray" />
-          <Text style={styles.navLabel}>Assets</Text>
+          <MaterialIcons
+            name="analytics"
+            size={26}
+            color={pathname.includes("/assets") ? '#003CFF' : 'gray'}
+          />
+          <Text style={pathname.includes("/assets") ? styles.navLabelActive : styles.navLabel}>
+            Assets
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.navItem, styles.centerSwap]}
+          style={styles.navItem}
           onPress={() => router.push("/(auth)/(footerview)/swap")}
         >
-          <View style={styles.centerSwapIcon}>
-            <Ionicons name="swap-vertical-outline" size={26} color="gray" />
-          </View>
-          <Text style={styles.navLabelCenter}>Swap</Text>
+          <Ionicons
+            name="swap-vertical-outline"
+            size={26}
+            color={pathname.includes("/swap") ? '#003CFF' : 'gray'}
+          />
+          <Text style={pathname.includes("/swap") ? styles.navLabelActive : styles.navLabelCenter}>
+            Swap
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.navItem}
           onPress={() => router.push("/(auth)/(footerview)/history")}
         >
-          <Ionicons name="time-outline" size={26} color="gray" />
-          <Text style={styles.navLabel}>History</Text>
+          <Ionicons
+            name="time-outline"
+            size={26}
+            color={pathname.includes("/history") ? '#003CFF' : 'gray'}
+          />
+          <Text style={pathname.includes("/history") ? styles.navLabelActive : styles.navLabel}>
+            History
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.navItem}
           onPress={() => router.push("/(auth)/(footerview)/settings")}
         >
-          <Ionicons name="settings-outline" size={26} color="gray" />
-          <Text style={styles.navLabel}>Settings</Text>
+          <Ionicons
+            name="settings-outline"
+            size={26}
+            color={pathname.includes("/settings") ? '#003CFF' : 'gray'}
+          />
+          <Text style={pathname.includes("/settings") ? styles.navLabelActive : styles.navLabel}>
+            Settings
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
-};
-
-export default AuthFooter;
+}
 
 const styles = StyleSheet.create({
   bottomNav: {
+    marginBottom: -35,
+    paddingBottom: 20,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    height: 80,
+    height: 90,
     backgroundColor: "white",
     borderTopWidth: 1,
     borderColor: "#eee",
@@ -80,18 +108,8 @@ const styles = StyleSheet.create({
   },
   navLabelActive: {
     fontSize: 12,
-    color: theme.colors.primary,
+    color: '#003CFF',
     fontWeight: "600",
-  },
-  centerSwap: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: -10,
-  },
-  centerSwapIcon: {
-    backgroundColor: "transparent",
-    borderRadius: 30,
-    padding: 0,
   },
   navLabelCenter: {
     fontSize: 12,
