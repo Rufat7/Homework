@@ -5,78 +5,126 @@ import {
   TouchableOpacity,
   useWindowDimensions,
   View,
+  Alert,
 } from "react-native";
-import  { useState } from "react";
+import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { theme } from "../../../constants/theme";
-
-import { router} from "expo-router";
+import { router } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
+import { useAuthStore } from "../../../store/authStore";
 
 const Login = () => {
   const { width } = useWindowDimensions();
   const styles = getStyles(width);
-  const [rememberMe, setRememberMe] = useState(false);
+  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const { 
+    login, 
+    isLoading, 
+    error, 
+    rememberMe, 
+    setRememberMe, 
+    clearError 
+  } = useAuthStore();
 
- return (
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+
+    const result = await login(email, password);
+    
+    if (result.success) {
+      router.push("/(auth)/otp"); 
+    } else {
+      Alert.alert('Login Error', result.error || 'Failed to login');
+    }
+  };
+
+  return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.content}>
-        
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Email</Text>
-            <TextInput
-              style={styles.input}
-            />
-          </View>
-
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Password</Text>
-            <TextInput
-              style={styles.input}
-              secureTextEntry
-            />
-          </View>
-
-          <View style={styles.rememberRow}>
-            <View style={styles.checkboxTextWrapper}>
-              <TouchableOpacity
-                style={[styles.checkboxWrapper, rememberMe && styles.checkboxChecked]}
-                onPress={() => setRememberMe(!rememberMe)}
-              >
-                {rememberMe && (
-                  <FontAwesome name="check" size={16} color={theme.colors.white} />
-                )}
-              </TouchableOpacity>
-              <Text style={styles.rememberText}>Remember me</Text>
-            </View>
-            <TouchableOpacity>
-              <Text style={styles.forgotText} onPress={() => {
-            router.push("/(auth)/forgot-password");
-          }} >Forgot password?</Text>
-            </TouchableOpacity>
-          </View>
-
-          <TouchableOpacity style={styles.loginButton} onPress={() => {
-            router.push("/(auth)/otp");
-          }}>
-            <Text style={styles.loginButtonText}>Log In</Text>
-          </TouchableOpacity>
-
-          <Text style={styles.dividerText}>-----------------  or login with  -----------------</Text>
-
-          <View style={styles.socialRow}>
-            <TouchableOpacity style={[styles.socialButtonRect, styles.socialButtonShadow]}>
-              <FontAwesome name="google" size={24} color="black" />
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.socialButtonRect, styles.socialButtonShadow]}>
-              <FontAwesome name="apple" size={24} color="black" />
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.socialButtonRect, styles.socialButtonShadow]}>
-              <FontAwesome name="twitter" size={24} color="#1DA1F2" />
-            </TouchableOpacity>
-          </View>
+        <View style={styles.inputWrapper}>
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            style={styles.input}
+            value={email}
+            onChangeText={setEmail}
+            placeholder="Enter your email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            onFocus={clearError}
+          />
         </View>
-      
+
+        <View style={styles.inputWrapper}>
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            style={styles.input}
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Enter your password"
+            secureTextEntry
+            onFocus={clearError}
+          />
+        </View>
+
+        {error && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{error}</Text>
+          </View>
+        )}
+
+        <View style={styles.rememberRow}>
+          <View style={styles.checkboxTextWrapper}>
+            <TouchableOpacity
+              style={[styles.checkboxWrapper, rememberMe && styles.checkboxChecked]}
+              onPress={() => setRememberMe(!rememberMe)}
+            >
+              {rememberMe && (
+                <FontAwesome name="check" size={16} color={theme.colors.white} />
+              )}
+            </TouchableOpacity>
+            <Text style={styles.rememberText}>Remember me</Text>
+          </View>
+          <TouchableOpacity>
+            <Text 
+              style={styles.forgotText} 
+              onPress={() => router.push("/(auth)/forgot-password")}
+            >
+              Forgot password?
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity 
+          style={[styles.loginButton, isLoading && styles.loginButtonDisabled]} 
+          onPress={handleLogin}
+          disabled={isLoading}
+        >
+          <Text style={styles.loginButtonText}>
+            {isLoading ? 'Logging in...' : 'Log In'}
+          </Text>
+        </TouchableOpacity>
+
+        <Text style={styles.dividerText}>-----------------  or login with  -----------------</Text>
+
+        <View style={styles.socialRow}>
+          <TouchableOpacity style={[styles.socialButtonRect, styles.socialButtonShadow]}>
+            <FontAwesome name="google" size={24} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.socialButtonRect, styles.socialButtonShadow]}>
+            <FontAwesome name="apple" size={24} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.socialButtonRect, styles.socialButtonShadow]}>
+            <FontAwesome name="twitter" size={24} color="#1DA1F2" />
+          </TouchableOpacity>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -95,26 +143,6 @@ const getStyles = (width: number) =>
       flex: 1,
       width: width - 32,
       gap: 22,
-    },
-   
-    tabRow: {
-      flexDirection: "row",
-      padding: 2,
-      gap: 10,
-      width: "100%",
-      backgroundColor: "#F8F9FA",
-      borderRadius: 12,
-    },
-    tabButton: {
-      flex: 1,
-      alignItems: "center",
-      paddingVertical: 12,
-      borderRadius: 12,
-    },
-    tabText: {
-      fontFamily: theme.fonts.medium,
-      fontSize: 16,
-      color: theme.colors.secondary,
     },
     inputWrapper: {
       width: "100%",
@@ -135,6 +163,18 @@ const getStyles = (width: number) =>
       fontSize: 16,
       fontFamily: theme.fonts.regular,
       backgroundColor: "#fff",
+    },
+    errorContainer: {
+      backgroundColor: '#ffebee',
+      padding: 12,
+      borderRadius: 8,
+      borderLeftWidth: 4,
+      borderLeftColor: '#f44336',
+    },
+    errorText: {
+      color: '#c62828',
+      fontSize: 14,
+      fontFamily: theme.fonts.regular,
     },
     rememberRow: {
       flexDirection: "row",
@@ -180,6 +220,9 @@ const getStyles = (width: number) =>
       alignItems: "center",
       marginTop: 12,
     },
+    loginButtonDisabled: {
+      backgroundColor: theme.colors.grey,
+    },
     loginButtonText: {
       color: theme.colors.white,
       fontSize: 16,
@@ -195,7 +238,6 @@ const getStyles = (width: number) =>
       flexDirection: "row",
       justifyContent: "space-between",
       gap: 12,
- 
       width: "100%",
     },
     socialButtonRect: {
