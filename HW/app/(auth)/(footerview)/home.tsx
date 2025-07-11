@@ -33,6 +33,7 @@ const Home = () => {
             <Ionicons name="notifications-outline" size={30} color="black" />
           </TouchableOpacity>
         </View>
+
         <View style={styles.balanceCard}>
           <View style={styles.circleWrapper}>
             {[...Array(21)].map((_, index) => {
@@ -76,6 +77,7 @@ const Home = () => {
               );
             })}
           </View>
+
           <Ionicons
             name="flash"
             size={25}
@@ -87,15 +89,14 @@ const Home = () => {
 
           <View style={styles.actionsRow}>
             <TouchableOpacity style={styles.actionButton}>
-              <Ionicons
-                name="arrow-down-outline"
-                size={42}
-                color="black"
-              />
+              <Ionicons name="arrow-down-outline" size={42} color="black" />
               <Text style={styles.actionLabel}>Deposit</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.centerAction}>
+            <TouchableOpacity
+              style={styles.centerAction}
+              onPress={() => router.push("/(auth)/(footerview)/swap")}>
+          
               <View style={styles.swapIconWrapper}>
                 <Ionicons name="swap-vertical" size={28} color="white" />
               </View>
@@ -103,11 +104,7 @@ const Home = () => {
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.actionButton}>
-              <Ionicons
-                name="arrow-up-outline"
-                size={42}
-                color="black"
-              />
+              <Ionicons name="arrow-up-outline" size={42} color="black" />
               <Text style={styles.actionLabel}>Send</Text>
             </TouchableOpacity>
           </View>
