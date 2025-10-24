@@ -7,7 +7,8 @@ import './Navbar.css';
 import { useTranslation } from 'react-i18next';
 import Login from '../login/Login';
 import Register from '../register/Register';
-import useAuth from '../useAuth';
+import { useAuth } from '../../hooks/AuthContext';
+
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();

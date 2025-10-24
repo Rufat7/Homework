@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DashBoard.css';
 import { useTranslation } from 'react-i18next';
-import useAuth from '../../components/useAuth';
+import { useAuth } from '../../hooks/AuthContext';
 import { toast } from 'react-toastify';
 
 export default function Dashboard() {

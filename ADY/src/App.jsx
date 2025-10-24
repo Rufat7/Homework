@@ -14,27 +14,33 @@ import { TripProvider } from './context/TripContext';
 import Dashboard from './components/dashboard/DashBoard';
 import AdminPanel from './components/adminpanel/AdminPanel.jsx';
 
+// ✅ Import the AuthProvider (you created this file earlier)
+import { AuthProvider } from './hooks/AuthContext';
+
 function App() {
   return (
     <TripProvider>
       <Router>
-        <div className='w-full min-h-screen bg-neutral-50 dark:bg-[#12141c] text-neutral-800 dark:text-neutral-300 flex flex-col overflow-hidden'>
-          <Navbar />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/train' element={<Train />} />
-            <Route path='/detail/:tripType' element={<Detail />} />
-            <Route path='/detail' element={<Detail />} />
-            <Route path='/checkout' element={<Checkout />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/category' element={<Category />} />
-            <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/admin' element={<AdminPanel />} />
-            <Route path='/news' element={<News />} />
-          </Routes>
-          <ChatBot />
-          <Footer />
-        </div>
+        {/* ✅ Wrap the entire app in AuthProvider */}
+        <AuthProvider>
+          <div className='w-full min-h-screen bg-neutral-50 dark:bg-[#12141c] text-neutral-800 dark:text-neutral-300 flex flex-col overflow-hidden'>
+            <Navbar />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/train' element={<Train />} />
+              <Route path='/detail/:tripType' element={<Detail />} />
+              <Route path='/detail' element={<Detail />} />
+              <Route path='/checkout' element={<Checkout />} />
+              <Route path='/about' element={<About />} />
+              <Route path='/category' element={<Category />} />
+              <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/admin' element={<AdminPanel />} />
+              <Route path='/news' element={<News />} />
+            </Routes>
+            <ChatBot />
+            <Footer />
+          </div>
+        </AuthProvider>
       </Router>
     </TripProvider>
   );

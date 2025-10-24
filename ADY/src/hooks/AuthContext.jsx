@@ -1,14 +1,18 @@
-// src/hooks/useAuth.js
-import { useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const useAuth = () => {
+
+const AuthContext = createContext();
+
+
+export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userData, setUserData] = useState(null);
   const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
 
+  
   useEffect(() => {
     const verifyAuth = async () => {
       try {
@@ -37,12 +41,14 @@ const useAuth = () => {
     verifyAuth();
   }, []);
 
+
   const login = (userData, role) => {
     setIsAuthenticated(true);
     setUserData(userData);
     setUserRole(role);
   };
 
+  
   const logout = async () => {
     try {
       await fetch('https://localhost:7261/api/Users/Logout', {
@@ -58,7 +64,20 @@ const useAuth = () => {
     }
   };
 
-  return { isAuthenticated, userData, userRole, login, logout };
+  return (
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        userData,
+        userRole,
+        login,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-export default useAuth;
+// Hook for consuming the context
+export const useAuth = () => useContext(AuthContext);

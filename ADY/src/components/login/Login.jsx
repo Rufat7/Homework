@@ -3,7 +3,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.css';
 import { useTranslation } from 'react-i18next';
-import useAuth from '../../components/useAuth';
+import { useAuth } from '../../hooks/AuthContext';
+
 
 export default function Login({ onClose, openRegister }) {
   const { t } = useTranslation();
