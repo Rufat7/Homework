@@ -13,6 +13,7 @@ import Category from './components/category/Category';
 import Dashboard from './components/dashboard/DashBoard';
 import AdminPanel from './components/adminpanel/AdminPanel.jsx';
 
+
 import { TripProvider } from './context/TripContext';
 import { AuthProvider, useAuth } from './hooks/AuthContext';
 import Login from './components/login/Login';
@@ -23,7 +24,7 @@ function AppContent() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
-  // Автооткрытие логина только если сессия проверена и пользователь не авторизован
+
   useEffect(() => {
     if (!loading && !isAuthenticated) {
       setShowLoginModal(true);

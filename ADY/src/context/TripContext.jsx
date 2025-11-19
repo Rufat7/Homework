@@ -1,74 +1,55 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const TripContext = createContext();
 
 export const TripProvider = ({ children }) => {
-  const [trip, setTrip] = useState({
-    from: "",
-    to: "",
-    date: "",
-    time: "",
-    seats: [],
-    bookedSeats: [], 
+  const [trip, setTrip] = useState(() => {
+    try {
+      const saved = sessionStorage.getItem("trip-data");
+      return saved
+        ? JSON.parse(saved)
+        : {
+            from: "",
+            to: "",
+            date: "",
+            time: "",
+            seats: [],
+            totalPrice: 0,
+            bookedSeats: [],
+          };
+    } catch {
+      return {
+        from: "",
+        to: "",
+        date: "",
+        time: "",
+        seats: [],
+        totalPrice: 0,
+        bookedSeats: [],
+      };
+    }
   });
 
-  useEffect(() => {
-    const savedTrip = JSON.parse(localStorage.getItem("trip")) || {};
-    setTrip(savedTrip);
-  }, []);
 
   useEffect(() => {
-    localStorage.setItem("trip", JSON.stringify(trip));
+    sessionStorage.setItem("trip-data", JSON.stringify(trip));
   }, [trip]);
 
-  const updateTrip = (field, value) => {
-    setTrip((prev) => ({ ...prev, [field]: value }));
-  };
+  const updateTrip = (key, value) => {
+    setTrip((prev) => {
+      let updated = { ...prev, [key]: value };
 
-  const addSeat = (seatNumber) => {
-    setTrip((prev) => ({
-      ...prev,
-      seats: [...prev.seats, seatNumber],
-    }));
-  };
+  
+      if (key === "seats") {
+        updated.totalPrice = value.length * 15;
+      }
 
-  const removeSeat = (seatNumber) => {
-    setTrip((prev) => ({
-      ...prev,
-      seats: prev.seats.filter((seat) => seat !== seatNumber),
-    }));
+      return updated;
+    });
   };
-
-  const bookSeats = (seats) => {
-    setTrip((prev) => ({
-      ...prev,
-      bookedSeats: [...new Set([...prev.bookedSeats, ...seats])],
-    }));
-  };
-
-  const unbookSeats = (seats) => {
-    setTrip((prev) => ({
-      ...prev,
-      bookedSeats: prev.bookedSeats.filter((seat) => !seats.includes(seat)),
-    }));
-  };
-
-  const seatPrice = 15;
-  const totalPrice = trip.seats.length * seatPrice;
 
   return (
-    <TripContext.Provider
-      value={{
-        trip,
-        updateTrip,
-        addSeat,
-        removeSeat,
-        bookedSeats: trip.bookedSeats,
-        bookSeats,
-        unbookSeats,
-        totalPrice,
-      }}
-    >
+    <TripContext.Provider value={{ trip, updateTrip }}>
       {children}
     </TripContext.Provider>
   );
