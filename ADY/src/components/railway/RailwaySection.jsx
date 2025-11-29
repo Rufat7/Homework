@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./RailwaySection.css";
-import trainImg from "../../assets/tr.png"; 
+import trainImg from "../../assets/tr.png"; // put your image (2nd screenshot) here
 
 const RailwaySection = () => {
   const { t } = useTranslation();

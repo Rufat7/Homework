@@ -15,7 +15,7 @@ const Checkout = () => {
 
   const sendEmailAndSaveTicket = async (fullname, email, phone) => {
     try {
-
+      // Создание билета на бэке
       const ticketResponse = await axios.post(
         "https://localhost:7261/api/Tickets/Create",
         {
@@ -27,12 +27,13 @@ const Checkout = () => {
           time: trip.time,
           seats: trip.seats.join(", "),
           totalPrice: trip.totalPrice,
-          userId: 1, 
+          userId: 1, // пока фиктивный пользователь
         }
       );
 
       console.log("Ticket saved:", ticketResponse.data);
 
+      // Отправка email (если у тебя есть эндпоинт)
       await axios.post("http://localhost:5000/send-email", {
         fullname,
         email,
@@ -43,6 +44,7 @@ const Checkout = () => {
 
       setEmailSentMessage(t("Email sent and ticket saved successfully!"));
 
+      // Перенаправление через секунду
       setTimeout(() => {
         setEmailSentMessage("");
         navigate("/"); 

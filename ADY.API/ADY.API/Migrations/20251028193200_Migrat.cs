@@ -5,9 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ADY.API.Migrations
 {
+    /// <inheritdoc />
     public partial class Migrat : Migration
     {
-        
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -62,7 +63,7 @@ namespace ADY.API.Migrations
                 column: "UserId");
         }
 
-      
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

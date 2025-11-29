@@ -15,7 +15,7 @@ namespace ADY.API.Controllers
             _dbContext = dbContext;
         }
 
-       
+        // POST: api/Tickets/Create
         [HttpPost("Create")]
         public async Task<IActionResult> CreateTicket([FromBody] Ticket ticket)
         {
@@ -47,6 +47,7 @@ namespace ADY.API.Controllers
             }
         }
 
+        // GET: api/Tickets/{ticketId}
         [HttpGet("{ticketId}")]
         public async Task<IActionResult> GetTicketById(int ticketId)
         {
@@ -58,7 +59,7 @@ namespace ADY.API.Controllers
             return Ok(ticket);
         }
 
-
+        // GET: api/Tickets/User/{userId}
         [HttpGet("User/{userId}")]
         public async Task<IActionResult> GetTicketsByUserId(int userId)
         {
@@ -72,6 +73,7 @@ namespace ADY.API.Controllers
             return Ok(tickets);
         }
 
+        // GET: api/Tickets/All
         [HttpGet("All")]
         public async Task<IActionResult> GetAllTickets()
         {
@@ -83,7 +85,7 @@ namespace ADY.API.Controllers
             return Ok(tickets);
         }
 
-     
+        // PUT: api/Tickets/Update/{ticketId}
         [HttpPut("Update/{ticketId}")]
         public async Task<IActionResult> UpdateTicket(int ticketId, [FromBody] Ticket updatedTicket)
         {
@@ -138,7 +140,7 @@ namespace ADY.API.Controllers
             return Ok(bookedSeats);
         }
 
-      
+        // DELETE: api/Tickets/Delete/{ticketId}
         [HttpDelete("Delete/{ticketId}")]
         public async Task<IActionResult> DeleteTicket(int ticketId)
         {

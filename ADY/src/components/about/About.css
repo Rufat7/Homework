@@ -1,3 +1,4 @@
+/* === Base / theme variables === */
 :root {
   --accent: #1d5c87;
  
@@ -6,6 +7,7 @@
   --card-shadow: 0 12px 40px rgba(2, 6, 23, 0.35);
 }
 
+/* light / dark */
 .light {
   --bg: #fbfbfd;
   --text: #111827;
@@ -27,11 +29,13 @@ body {
   color: var(--text);
 }
 
+/* === Page wrapper === */
 .about-page {
   font-family: "Inter", "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   line-height: 1.6;
 }
 
+/* ================= HERO (full screen cinematic) ================= */
 .hero {
   position: relative;
   height: 100vh;
@@ -116,21 +120,25 @@ body {
   font-size: 0.85rem;
 }
 
+/* ========== SECTIONS ========== */
 .section {
   padding: 80px 20px;
 }
 
+/* containers */
 .container {
   max-width: 1200px;
   margin: 0 auto;
 }
 
+/* big section titles */
 .big-title {
   font-size: clamp(1.8rem, 3.2vw, 2.8rem);
  
   color: var(--accent);
 }
 
+/* mission */
 .mission .lead {
   font-size: 1.15rem;
   color: black;
@@ -141,6 +149,7 @@ body {
 }
 
 
+/* ===================== VALUES GRID ===================== */
 .values-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -192,6 +201,7 @@ body {
   line-height: 1.6;
 }
 
+/* specific backgrounds */
 .value-media--innovation {
   background-image: url("../../assets/image.png");
 }
@@ -204,6 +214,7 @@ body {
   background-image: url("../../assets/image3.png");
 }
 
+/* ===================== HISTORY ===================== */
 .history-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -236,6 +247,7 @@ body {
   color: var(--muted);
 }
 
+/* ===================== ACHIEVEMENTS ===================== */
 .achievements-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -279,10 +291,12 @@ body {
   background-image: url("../../assets/pp.png");
 }
 
+/* ===================== FUTURE ===================== */
 .future .centered {
   text-align: center;
 }
 
+/* animations */
 @keyframes heroZoom {
   0% {
     transform: scale(1);
@@ -297,6 +311,7 @@ body {
   }
 }
 
+/* small utilities */
 .container.centered {
   display: flex;
   flex-direction: column;
@@ -308,7 +323,8 @@ body {
 
 .mission {
   padding-top: 40px;
-  padding-bottom: 1px;}
+  padding-bottom: 1px; /* было 100px, теперь меньше */
+}
 
 .values {
   padding-top: 40px;

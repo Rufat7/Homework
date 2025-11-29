@@ -63,7 +63,7 @@ namespace ADY.API.Controllers
                 FirstName = userDTO.FirstName,
                 LastName = userDTO.LastName,
                 Email = userDTO.Email,
-                Password = userDTO.Password 
+                Password = userDTO.Password // TODO: Hash passwords in production
             };
 
             dbContext.Users.Add(newUser);
@@ -112,7 +112,7 @@ namespace ADY.API.Controllers
                 HttpOnly = true,
                 Secure = true,
                 SameSite = SameSiteMode.None,
-                Expires = DateTime.UtcNow.AddDays(-1) 
+                Expires = DateTime.UtcNow.AddDays(-1) // удаляем cookie
             });
 
             return Ok("Logged out successfully");
@@ -137,7 +137,7 @@ namespace ADY.API.Controllers
             return NoContent();
         }
 
-      
+        // Новый endpoint для восстановления сессии
         [HttpGet("RefreshToken")]
         public IActionResult RefreshToken()
         {

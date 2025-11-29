@@ -20,7 +20,7 @@ export default function Dashboard() {
 
   const colorOptions = ['#000000ff', '#930093ff', '#1E88E5', '#ff0000ff'];
 
-  
+  // Ключ для хранения данных конкретного пользователя
   const userKey = userData?.email ? `avatarData_${userData.email}` : null;
 
   const getTimeOfDay = () => {
@@ -30,6 +30,7 @@ export default function Dashboard() {
     return t('Good evening');
   };
 
+  // Проверка авторизации
   useEffect(() => {
     if (!isAuthenticated || !userData) {
       toast.error('Please log in to access the dashboard.');
@@ -38,6 +39,7 @@ export default function Dashboard() {
     }
   }, [isAuthenticated, userData, navigate]);
 
+  // Загружаем данные из localStorage
   useEffect(() => {
     if (!userData || !userKey) return;
 
@@ -60,7 +62,7 @@ export default function Dashboard() {
     }
   }, [userKey, userData]);
 
-
+  // Сохраняем в localStorage все данные
   useEffect(() => {
     if (!userKey) return;
     const data = { color: avatarColor, photo: avatarPhoto, symbol: avatarSymbol };
@@ -72,15 +74,17 @@ export default function Dashboard() {
     if (setUserData) setUserData((prev) => ({ ...prev, avatarColor: color }));
   };
 
+  // === Исправленный код загрузки фото ===
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onloadend = () => {
-      const photoData = reader.result; 
+      const photoData = reader.result; // base64
       setAvatarPhoto(photoData);
 
+      // Сразу сохраняем в localStorage, чтобы не потерялось
       if (userKey) {
         const saved = JSON.parse(localStorage.getItem(userKey)) || {};
         saved.photo = photoData;

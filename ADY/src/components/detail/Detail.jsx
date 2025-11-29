@@ -19,6 +19,7 @@ const Detail = () => {
     <div className="w-full lg:px-26 md:px-16 sm:px-7 px-4 mt-12 mb-[10ch]">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-16 items-start">
 
+        {/* --- Left side: Train info --- */}
         <div className="col-span-1 flex flex-col justify-start gap-4">
           <img 
             src={Train} 
@@ -46,6 +47,7 @@ const Detail = () => {
           </div>
         </div>
 
+        {/* --- Right side: Search + Seats --- */}
         <div className="col-span-1 space-y-10">
           <div className="space-y-6">
             <Search tripType={tripType} />

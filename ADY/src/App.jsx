@@ -24,7 +24,7 @@ function AppContent() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
-
+  // Автооткрытие логина только если сессия проверена и пользователь не авторизован
   useEffect(() => {
     if (!loading && !isAuthenticated) {
       setShowLoginModal(true);
