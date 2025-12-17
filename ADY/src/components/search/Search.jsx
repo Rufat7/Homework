@@ -2,13 +2,58 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useTrip } from "../../context/TripContext";
 
+const getTodayLocal = () => {
+  const now = new Date();
+  const offset = now.getTimezoneOffset() * 60000;
+  return new Date(now - offset).toISOString().split("T")[0];
+};
+
+const distances = {
+  absheron: {
+    Baku: { Sumqayit: 30, Novxani: 25, Goredil: 35, Pirsagi: 40, Koroglu: 10 },
+    Sumqayit: { Baku: 30, Novxani: 10, Goredil: 15, Pirsagi: 20, Koroglu: 25 },
+    Novxani: { Baku: 25, Sumqayit: 10 },
+    Goredil: { Baku: 35 },
+    Pirsagi: { Baku: 40 },
+    Koroglu: { Baku: 10 },
+  },
+  intercity: {
+    BakuDYV: { Ucar: 230, Agdas: 240, Gence: 365, Tovuz: 460, Agstafa: 480 },
+    Gence: { BakuDYV: 365, Tovuz: 95, Agstafa: 115 },
+    Tovuz: { BakuDYV: 460 },
+  },
+};
+
+const PRICE_PER_KM = { absheron: 0.15, intercity: 0.10 };
+
+const calculatePrice = (tripType, from, to) => {
+  if (!tripType || !from || !to) return 0;
+  const distance =
+    distances[tripType]?.[from]?.[to] || distances[tripType]?.[to]?.[from] || 0;
+  if (!distance) return 0;
+  return Math.round(distance * PRICE_PER_KM[tripType]);
+};
+
 const Search = ({ tripType }) => {
   const { t } = useTranslation();
-  const { trip, updateTrip } = useTrip();
-  const [from, setFrom] = useState(trip.from || "");
-  const [to, setTo] = useState(trip.to || "");
-  const [date, setDate] = useState(trip.date || "");
-  const [time, setTime] = useState(trip.time || "");
+  const { trip, updateTrip, resetTrip } = useTrip();
+
+  const currentDate = getTodayLocal();
+
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [date, setDate] = useState(currentDate);
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    resetTrip();
+    setFrom("");
+    setTo("");
+    setDate(currentDate);
+    setTime("");
+    updateTrip("date", currentDate);
+    updateTrip("tripType", tripType);
+  }, [tripType]);
 
   const absheronLocations = [
     { value: "Baku", label: t("baku") },
@@ -20,7 +65,7 @@ const Search = ({ tripType }) => {
   ];
 
   const intercityLocations = [
-    { value: "Baku", label: t("baku") },
+    { value: "BakuDYV", label: t("bakudyv") },
     { value: "Ucar", label: t("ucar") },
     { value: "Agdas", label: t("agdas") },
     { value: "Gence", label: t("gence") },
@@ -40,7 +85,7 @@ const Search = ({ tripType }) => {
       Koroglu: ["10:00", "16:00", "21:00"],
     },
     intercity: {
-      Baku: ["08:00", "12:00", "16:00"],
+      BakuDYV: ["08:00", "12:00", "16:00"],
       Ucar: ["09:00", "13:00", "17:00"],
       Agdas: ["09:30", "13:30", "17:30"],
       Gence: ["10:00", "14:00", "18:00"],
@@ -49,13 +94,13 @@ const Search = ({ tripType }) => {
     },
   };
 
-  const handleFromChange = (event) => {
-    const selectedFrom = event.target.value;
-    setFrom(selectedFrom);
-    updateTrip("from", selectedFrom);
+  const handleFromChange = (e) => {
+    const value = e.target.value;
+    setFrom(value);
+    updateTrip("from", value);
 
-    if (schedule[tripType]?.[selectedFrom]) {
-      const defaultTime = schedule[tripType][selectedFrom][0];
+    if (schedule[tripType]?.[value]) {
+      const defaultTime = schedule[tripType][value][0];
       setTime(defaultTime);
       updateTrip("time", defaultTime);
     } else {
@@ -63,134 +108,105 @@ const Search = ({ tripType }) => {
       updateTrip("time", "");
     }
 
-    if (selectedFrom === to) {
+    if (value === to) {
       setTo("");
       updateTrip("to", "");
     }
   };
 
-  const handleToChange = (event) => {
-    const selectedTo = event.target.value;
-    setTo(selectedTo);
-    updateTrip("to", selectedTo);
+  const handleToChange = (e) => {
+    const value = e.target.value;
+    setTo(value);
+    updateTrip("to", value);
 
-    if (selectedTo === from) {
+    if (value === from) {
       setFrom("");
       updateTrip("from", "");
     }
   };
 
-  const handleDateChange = (event) => {
-    const selectedDate = event.target.value;
-    setDate(selectedDate);
-    updateTrip("date", selectedDate);
+  const handleDateChange = (e) => {
+    setDate(e.target.value);
+    updateTrip("date", e.target.value);
   };
 
-  const handleTimeChange = (event) => {
-    const selectedTime = event.target.value;
-    setTime(selectedTime);
-    updateTrip("time", selectedTime);
+  const handleTimeChange = (e) => {
+    setTime(e.target.value);
+    updateTrip("time", e.target.value);
   };
 
-  useEffect(() => {
-    const currentDate = new Date().toISOString().split("T")[0];
-    if (!date) {
-      setDate(currentDate);
-      updateTrip("date", currentDate);
-    }
-
-    if (from && schedule[tripType]?.[from]) {
-      const defaultTime = schedule[tripType][from][0];
-      setTime(defaultTime);
-      updateTrip("time", defaultTime);
-    }
-  }, [from, tripType]);
-
-  const currentDate = new Date().toISOString().split("T")[0];
+  const dynamicPrice = calculatePrice(tripType, from, to);
 
   return (
     <div className="w-full flex justify-center my-[8ch]">
       <div className="w-full max-w-4xl bg-neutral-100 rounded-md dark:bg-neutral-800/30 p-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-10 gap-y-12 items-end">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-12 items-end">
           <div>
-            <label htmlFor="from" className="block mb-2 font-semibold">
-              {t("from")}
-            </label>
+            <label className="block mb-2 font-semibold">{t("from")}</label>
             <select
-              name="from"
-              id="from"
               value={from}
               onChange={handleFromChange}
-              className="w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 inline-block bg-neutral-200/60 dark:bg-neutral-800/50 px-3 h-12 border border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-900"
+              className="w-full h-12 bg-neutral-200/60 dark:bg-neutral-800/50 rounded-md px-3"
             >
               <option value="">{t("select location")}</option>
               {locations
-                .filter((location) => location.value !== to)
-                .map((location) => (
-                  <option key={location.value} value={location.value}>
-                    {location.label}
+                .filter((l) => l.value !== to)
+                .map((l) => (
+                  <option key={l.value} value={l.value}>
+                    {l.label}
                   </option>
                 ))}
             </select>
           </div>
 
           <div>
-            <label htmlFor="to" className="block mb-2 font-semibold">
-              {t("to")}
-            </label>
+            <label className="block mb-2 font-semibold">{t("to")}</label>
             <select
-              name="to"
-              id="to"
               value={to}
               onChange={handleToChange}
-              className="w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 inline-block bg-neutral-200/60 dark:bg-neutral-800/50 px-3 h-12 border border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-900"
+              className="w-full h-12 bg-neutral-200/60 dark:bg-neutral-800/50 rounded-md px-3"
             >
               <option value="">{t("select location")}</option>
               {locations
-                .filter((location) => location.value !== from)
-                .map((location) => (
-                  <option key={location.value} value={location.value}>
-                    {location.label}
+                .filter((l) => l.value !== from)
+                .map((l) => (
+                  <option key={l.value} value={l.value}>
+                    {l.label}
                   </option>
                 ))}
             </select>
           </div>
 
           <div>
-            <label htmlFor="date" className="block mb-2 font-semibold">
-              {t("choose date")}
-            </label>
+            <label className="block mb-2 font-semibold">{t("choose date")}</label>
             <input
               type="date"
-              id="date"
-              name="date"
               value={date}
-              onChange={handleDateChange}
               min={currentDate}
-              className="w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 inline-block bg-neutral-200/60 dark:bg-neutral-800/50 px-3 h-12 border border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-900"
+              onChange={handleDateChange}
+              className="w-full h-12 bg-neutral-200/60 dark:bg-neutral-800/50 rounded-md px-3"
             />
           </div>
 
           <div>
-            <label htmlFor="time" className="block mb-2 font-semibold">
-              {t("choose time")}
-            </label>
+            <label className="block mb-2 font-semibold">{t("choose time")}</label>
             <select
-              id="time"
-              name="time"
               value={time}
               onChange={handleTimeChange}
-              className="w-full appearance-none text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 inline-block bg-neutral-200/60 dark:bg-neutral-800/50 px-3 h-12 border border-neutral-200 dark:border-neutral-900 rounded-md focus:outline-none focus:bg-neutral-100 dark:focus:bg-neutral-900"
+              className="w-full h-12 bg-neutral-200/60 dark:bg-neutral-800/50 rounded-md px-3"
+              disabled={!from}
             >
               <option value="">{t("select time")}</option>
-              {schedule[tripType]?.[from]?.map((option) => (
-                <option key={option} value={option}>
-                  {option}
+              {schedule[tripType]?.[from]?.map((t) => (
+                <option key={t} value={t}>
+                  {t}
                 </option>
               ))}
             </select>
           </div>
         </div>
+
+       
       </div>
     </div>
   );

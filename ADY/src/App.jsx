@@ -9,10 +9,9 @@ import Checkout from './components/checkout/Checkout';
 import News from './components/news/News.jsx';
 import About from './components/about/About';
 import ChatBot from './components/chatbot/ChatBot';
-import Category from './components/category/Category';
+
 import Dashboard from './components/dashboard/DashBoard';
 import AdminPanel from './components/adminpanel/AdminPanel.jsx';
-
 
 import { TripProvider } from './context/TripContext';
 import { AuthProvider, useAuth } from './hooks/AuthContext';
@@ -24,7 +23,6 @@ function AppContent() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
-  // Автооткрытие логина только если сессия проверена и пользователь не авторизован
   useEffect(() => {
     if (!loading && !isAuthenticated) {
       setShowLoginModal(true);
@@ -62,7 +60,6 @@ function AppContent() {
           <Route path='/detail' element={<Detail />} />
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/about' element={<About />} />
-          <Route path='/category' element={<Category />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/admin' element={<AdminPanel />} />
           <Route path='/news' element={<News />} />

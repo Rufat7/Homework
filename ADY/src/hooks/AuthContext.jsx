@@ -8,14 +8,13 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userData, setUserData] = useState(null);
   const [userRole, setUserRole] = useState(null);
-  const [loading, setLoading] = useState(true); // флаг загрузки сессии
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Восстановление сессии при загрузке
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        const response = await fetch('https://localhost:7261/api/Users/RefreshToken', {
+        const response = await fetch('http://localhost:7261/api/Users/RefreshToken', {
           method: 'GET',
           credentials: 'include',
         });
@@ -50,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await fetch('https://localhost:7261/api/Users/Logout', {
+      await fetch('http://localhost:7261/api/Users/Logout', {
         method: 'POST',
         credentials: 'include',
       });
